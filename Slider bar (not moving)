@@ -1,0 +1,845 @@
+<?php
+$hero_badge_text = get_field('hero_badge_text') ?: 'The first non-diagnostic AI that understands animal anatomy';
+$hero_title = get_field('hero_title') ?: 'Sharper Images. Faster Scans. Higher ROI.';
+$hero_subtitle = get_field('hero_subtitle') ?: 'The Universal Standard of Veterinary Imaging';
+
+$hero_primary_cta_text = get_field('hero_primary_cta_text') ?: 'See the Performance. Drop Your Images';
+$hero_primary_cta_url = get_field('hero_primary_cta_url') ?: 'https://meetings-eu1.hubspot.com/patrick-hazelip?uuid=12a49f70-d167-4efa-abe7-08a62c914e5a';
+
+$hero_secondary_cta_text = get_field('hero_secondary_cta_text') ?: 'Estimate your ROI';
+$hero_secondary_cta_url = get_field('hero_secondary_cta_url') ?: '';
+
+$hero_before_label = get_field('hero_before_label') ?: 'Without HawkAI';
+$hero_after_label = get_field('hero_after_label') ?: 'With HawkAI';
+$hero_comparison_badge_text = get_field('hero_comparison_badge_text') ?: '50% FASTER +150% SNR';
+$hero_product_chip_text = get_field('hero_product_chip_text') ?: 'HawkAI';
+
+$hero_before_image = get_field('hero_before_image');
+$hero_after_image = get_field('hero_after_image');
+
+$get_image_data = function($image, $fallback_alt = '') {
+  if (is_array($image)) {
+    return array(
+      'url' => isset($image['url']) ? $image['url'] : '',
+      'alt' => !empty($image['alt']) ? $image['alt'] : $fallback_alt,
+    );
+  }
+
+  if (is_numeric($image)) {
+    return array(
+      'url' => wp_get_attachment_image_url($image, 'full'),
+      'alt' => get_post_meta($image, '_wp_attachment_image_alt', true) ?: $fallback_alt,
+    );
+  }
+
+  if (is_string($image) && !empty($image)) {
+    return array(
+      'url' => $image,
+      'alt' => $fallback_alt,
+    );
+  }
+
+  return array(
+    'url' => '',
+    'alt' => $fallback_alt,
+  );
+};
+
+$before_image = $get_image_data($hero_before_image, 'Before image');
+$after_image = $get_image_data($hero_after_image, 'After image');
+
+$hero_title_html = nl2br(esc_html($hero_title));
+if (trim($hero_title) === 'Sharper Images. Faster Scans. Higher ROI.') {
+  $hero_title_html = 'Sharper Images.<br>Faster Scans. Higher ROI.';
+}
+
+/*
+ * NEW: Build compare tabs data from repeater
+ */
+$compare_items = array();
+
+if (have_rows('hero_compare_tabs')) {
+  while (have_rows('hero_compare_tabs')) {
+    the_row();
+
+    $row_before_image = $get_image_data(get_sub_field('before_image'), 'Before image');
+    $row_after_image  = $get_image_data(get_sub_field('after_image'), 'After image');
+
+    if (!empty($row_before_image['url']) && !empty($row_after_image['url'])) {
+      $compare_items[] = array(
+        'tab_name'           => get_sub_field('tab_name') ?: 'Tab',
+        'before_image_url'   => $row_before_image['url'],
+        'before_image_alt'   => $row_before_image['alt'],
+        'after_image_url'    => $row_after_image['url'],
+        'after_image_alt'    => $row_after_image['alt'],
+        'compare_badge_text' => get_sub_field('compare_badge_text') ?: $hero_comparison_badge_text,
+        'before_label'       => get_sub_field('before_label') ?: $hero_before_label,
+        'after_label'        => get_sub_field('after_label') ?: $hero_after_label,
+        'product_chip_text'  => get_sub_field('product_chip_text') ?: $hero_product_chip_text,
+      );
+    }
+  }
+}
+
+/*
+ * Fallback to old single before/after fields if repeater is empty
+ */
+if (empty($compare_items) && !empty($before_image['url']) && !empty($after_image['url'])) {
+  $compare_items[] = array(
+    'tab_name'           => $hero_product_chip_text ?: 'HawkAI',
+    'before_image_url'   => $before_image['url'],
+    'before_image_alt'   => $before_image['alt'],
+    'after_image_url'    => $after_image['url'],
+    'after_image_alt'    => $after_image['alt'],
+    'compare_badge_text' => $hero_comparison_badge_text,
+    'before_label'       => $hero_before_label,
+    'after_label'        => $hero_after_label,
+    'product_chip_text'  => $hero_product_chip_text,
+  );
+}
+
+$default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
+?>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap');
+
+  body.home-test-hero-active .site-header {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  body.home-test-hero-active .site-header .borderline {
+    width: 100% !important;
+    opacity: 1 !important;
+    background: rgba(255,255,255,0.82) !important;
+  }
+
+  body.home-test-hero-active .site-header,
+  body.home-test-hero-active .site-header a,
+  body.home-test-hero-active .site-header svg,
+  body.home-test-hero-active .site-header .btn,
+  body.home-test-hero-active .site-header .wpml-ls-legacy-list-horizontal a {
+    color: #ffffff !important;
+    fill: currentColor !important;
+  }
+
+  body.home-test-hero-active .site-header a[rel="home"] img.light {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  body.home-test-hero-active .site-header a[rel="home"] img.dark {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  body.home-test-hero-active .site-header .sub-menu,
+  body.home-test-hero-active .site-header ul.sub-menu {
+    background: #ffffff !important;
+  }
+
+  body.home-test-hero-active .site-header .sub-menu a,
+  body.home-test-hero-active .site-header ul.sub-menu a,
+  body.home-test-hero-active .site-header .sub-menu li a,
+  body.home-test-hero-active .site-header ul.sub-menu li a {
+    color: #141412 !important;
+    fill: initial !important;
+  }
+
+  body.home-test-hero-active .site-header .sub-menu a:hover,
+  body.home-test-hero-active .site-header ul.sub-menu a:hover,
+  body.home-test-hero-active .site-header .sub-menu li a:hover,
+  body.home-test-hero-active .site-header ul.sub-menu li a:hover {
+    color: #d26f43 !important;
+  }
+
+  .hc-home-hero-v2,
+  .hc-home-hero-v2 * {
+    font-family: "Noto Sans", sans-serif !important;
+  }
+
+  .hc-home-hero-v2 {
+    position: relative;
+    overflow: hidden;
+    background: #050608 !important;
+    color: #ffffff;
+    min-height: 100svh;
+    padding: 154px 0 78px !important;
+  }
+
+  .hc-home-hero-v2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: none !important;
+    pointer-events: none;
+  }
+
+  .hc-home-hero-v2 .hc-hero-shell {
+    position: relative;
+    z-index: 2;
+    max-width: 1660px !important;
+    margin: 0 auto;
+    padding: 0 56px !important;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(560px, 690px) !important;
+    gap: 56px !important;
+    align-items: center !important;
+  }
+
+  .hc-home-hero-v2 .hc-hero-copy {
+    max-width: 920px !important;
+  }
+
+  .hc-home-hero-v2 .hc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 24px !important;
+    border: 1.5px solid rgba(255,255,255,0.34) !important;
+    border-radius: 999px;
+    background: transparent !important;
+    box-shadow: none !important;
+    margin-bottom: 52px !important;
+  }
+
+  .hc-home-hero-v2 .hc-badge-dot {
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50%;
+    background: #1f8cff !important;
+    flex: 0 0 16px;
+    box-shadow: none !important;
+  }
+
+  .hc-home-hero-v2 .hc-badge-text {
+    font-size: 17px !important;
+    line-height: 1.2 !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+  }
+
+  .hc-home-hero-v2 .hc-title {
+    margin: 0 0 42px !important;
+    max-width: 980px !important;
+    font-size: clamp(42px, 3.9vw, 56px) !important;
+    line-height: 1.05 !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.035em !important;
+    color: #ffffff !important;
+  }
+
+  .hc-home-hero-v2 .hc-title br {
+    display: block !important;
+    content: "" !important;
+  }
+
+  .hc-home-hero-v2 .hc-subtitle {
+    margin: 0 0 34px !important;
+    max-width: 900px !important;
+    font-size: clamp(18px, 1.45vw, 24px) !important;
+    line-height: 1.18 !important;
+    font-style: italic !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+  }
+
+  .hc-home-hero-v2 .hc-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .hc-home-hero-v2 .hc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 66px !important;
+    padding: 16px 20px !important;
+    border-radius: 8px !important;
+    border: 1px solid transparent;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    line-height: 1.1;
+    text-decoration: none;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    white-space: nowrap !important;
+  }
+
+  .hc-home-hero-v2 .hc-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .hc-home-hero-v2 .hc-btn-primary {
+    min-width: 500px !important;
+    background: #5ea8ff !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .hc-home-hero-v2 .hc-btn-primary:hover {
+    background: #4799fb !important;
+    color: #ffffff !important;
+  }
+
+  .hc-home-hero-v2 .hc-btn-secondary {
+    min-width: 260px !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    border-color: rgba(255,255,255,0.12);
+    box-shadow: none !important;
+  }
+
+  .hc-home-hero-v2 .hc-btn-secondary:hover {
+    background: #f3f3f3 !important;
+    color: #111111 !important;
+  }
+
+  .hc-home-hero-v2 .hc-btn-arrow {
+    font-size: 28px !important;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+
+  .hc-home-hero-v2 .hc-hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: flex-end !important;
+    align-items: center;
+  }
+
+  .hc-home-hero-v2 .hc-hero-stage {
+    width: min(100%, 668px);
+  }
+
+  .hc-home-hero-v2 .hc-compare {
+    --split: 54%;
+    position: relative;
+    width: 100% !important;
+    aspect-ratio: 1 / 1.08 !important;
+    background: #050608 !important;
+    overflow: visible !important;
+    user-select: none;
+    box-shadow: none !important;
+  }
+
+  .hc-home-hero-v2 .hc-compare-base,
+  .hc-home-hero-v2 .hc-compare-overlay,
+  .hc-home-hero-v2 .hc-compare-base img,
+  .hc-home-hero-v2 .hc-compare-overlay img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hc-home-hero-v2 .hc-compare-base img,
+  .hc-home-hero-v2 .hc-compare-overlay img {
+    display: block;
+    object-fit: cover !important;
+    object-position: center center !important;
+    background: #050608 !important;
+  }
+
+  .hc-home-hero-v2 .hc-compare-overlay {
+    clip-path: inset(0 calc(100% - var(--split)) 0 0);
+  }
+
+  .hc-home-hero-v2 .hc-compare-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--split);
+    width: 4px !important;
+    background: rgba(255,255,255,0.96) !important;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .hc-home-hero-v2 .hc-compare-handle {
+    position: absolute;
+    left: var(--split);
+    top: 50%;
+    width: 0 !important;
+    height: 0 !important;
+    transform: translate(-50%, -50%);
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .hc-home-hero-v2 .hc-compare-handle::before,
+  .hc-home-hero-v2 .hc-compare-handle::after {
+    display: none !important;
+  }
+
+  .hc-home-hero-v2 .hc-compare-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: ew-resize;
+    z-index: 5;
+    margin: 0;
+  }
+
+  .hc-home-hero-v2 .hc-compare-badge {
+    position: absolute;
+    left: var(--split);
+    bottom: 68px !important;
+    transform: translateX(-50%);
+    z-index: 4;
+    background: #ffffff;
+    color: #121212;
+    border-radius: 8px !important;
+    padding: 12px 14px !important;
+    font-size: 22px !important;
+    line-height: 1.02 !important;
+    font-weight: 800 !important;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: none !important;
+  }
+
+  .hc-home-hero-v2 .hc-compare-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 16px !important;
+    z-index: 4;
+    padding: 0 24px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    pointer-events: none;
+  }
+
+  .hc-home-hero-v2 .hc-compare-label {
+    font-size: 16px !important;
+    line-height: 1.1 !important;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+    text-align: center;
+    min-width: 130px;
+  }
+
+  .hc-home-hero-v2 .hc-chip {
+    position: absolute;
+    right: -132px !important;
+    bottom: 20px !important;
+    z-index: 4;
+    background: #f5cfac !important;
+    color: #d98a35 !important;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+    border-radius: 12px !important;
+    padding: 10px 18px !important;
+    box-shadow: none !important;
+  }
+
+  .hc-home-hero-v2 .hc-compare-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    margin-top: 28px;
+  }
+
+  .hc-home-hero-v2 .hc-compare-tab {
+    appearance: none;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border: 2px solid rgba(255,255,255,0.9);
+    background: transparent;
+    color: #ffffff;
+    border-radius: 999px;
+    min-height: 58px;
+    padding: 12px 28px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .hc-home-hero-v2 .hc-compare-tab::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 4px;
+    background: #111111;
+    opacity: 0;
+    z-index: 0;
+  }
+
+  .hc-home-hero-v2 .hc-compare-tab.is-playing::after {
+    opacity: 1;
+    animation: hcCompareTabProgress var(--hc-tab-duration, 4000ms) linear forwards;
+  }
+
+  .hc-home-hero-v2 .hc-compare-tab:hover {
+    transform: translateY(-1px);
+  }
+
+  .hc-home-hero-v2 .hc-compare-tab.is-active {
+    background: #ffffff;
+    color: #111111;
+    border-color: #ffffff;
+  }
+
+  @keyframes hcCompareTabProgress {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  .hc-home-hero-v2 .hc-placeholder {
+    display: grid;
+    place-items: center;
+    min-height: 520px;
+    padding: 30px;
+    background: #0c0c0c;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    font-size: 18px;
+  }
+
+  @media (max-width: 1180px) {
+    .hc-home-hero-v2 .hc-hero-shell {
+      grid-template-columns: 1fr !important;
+      gap: 38px !important;
+      padding: 0 28px !important;
+    }
+
+    .hc-home-hero-v2 .hc-hero-copy {
+      max-width: none;
+    }
+
+    .hc-home-hero-v2 .hc-subtitle,
+    .hc-home-hero-v2 .hc-badge-text {
+      white-space: normal !important;
+    }
+
+    .hc-home-hero-v2 .hc-hero-visual {
+      justify-content: flex-start !important;
+    }
+
+    .hc-home-hero-v2 .hc-hero-stage {
+      width: min(100%, 760px);
+    }
+
+    .hc-home-hero-v2 .hc-chip {
+      right: 18px !important;
+      bottom: 18px !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hc-home-hero-v2 {
+      padding: 128px 0 48px !important;
+    }
+
+    .hc-home-hero-v2 .hc-hero-shell {
+      padding: 0 18px !important;
+      gap: 28px !important;
+    }
+
+    .hc-home-hero-v2 .hc-title {
+      margin-bottom: 16px;
+      font-size: 46px !important;
+    }
+
+    .hc-home-hero-v2 .hc-subtitle {
+      margin-bottom: 28px;
+      font-size: 22px !important;
+    }
+
+    .hc-home-hero-v2 .hc-buttons {
+      flex-direction: column !important;
+      align-items: stretch !important;
+    }
+
+    .hc-home-hero-v2 .hc-btn {
+      width: 100% !important;
+      min-height: 58px !important;
+      font-size: 17px !important;
+    }
+
+    .hc-home-hero-v2 .hc-compare-badge {
+      bottom: 64px;
+      padding: 10px 12px;
+      font-size: 18px !important;
+    }
+
+    .hc-home-hero-v2 .hc-compare-footer {
+      padding: 0 12px;
+      bottom: 12px;
+    }
+
+    .hc-home-hero-v2 .hc-compare-label {
+      min-width: auto;
+      font-size: 12px !important;
+    }
+
+    .hc-home-hero-v2 .hc-compare-tab {
+      min-height: 50px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    .hc-home-hero-v2 .hc-chip {
+      right: 12px !important;
+      bottom: 12px !important;
+      font-size: 14px !important;
+      border-radius: 10px !important;
+      padding: 8px 14px !important;
+    }
+  }
+</style>
+
+<section class="hc-home-hero-v2" data-home-hero-v2>
+  <div class="hc-hero-shell">
+    <div class="hc-hero-copy">
+      <div class="hc-badge" data-hero-item>
+        <span class="hc-badge-dot"></span>
+        <span class="hc-badge-text"><?php echo esc_html($hero_badge_text); ?></span>
+      </div>
+
+      <h1 class="hc-title" data-hero-item><?php echo wp_kses_post($hero_title_html); ?></h1>
+
+      <p class="hc-subtitle" data-hero-item><?php echo esc_html($hero_subtitle); ?></p>
+
+      <div class="hc-buttons" data-hero-item>
+        <?php if ( !empty($hero_primary_cta_text) && !empty($hero_primary_cta_url) ) : ?>
+          <a class="hc-btn hc-btn-primary" href="<?php echo esc_url($hero_primary_cta_url); ?>">
+            <span><?php echo esc_html($hero_primary_cta_text); ?></span>
+            <span class="hc-btn-arrow">›</span>
+          </a>
+        <?php endif; ?>
+
+        <?php if ( !empty($hero_secondary_cta_text) ) : ?>
+          <a class="hc-btn hc-btn-secondary" href="<?php echo !empty($hero_secondary_cta_url) ? esc_url($hero_secondary_cta_url) : '#'; ?>">
+            <span><?php echo esc_html($hero_secondary_cta_text); ?></span>
+            <span class="hc-btn-arrow">›</span>
+          </a>
+        <?php endif; ?>
+      </div>
+    </div>
+
+    <div class="hc-hero-visual" data-hero-media>
+      <?php if ($default_compare_item) : ?>
+        <div class="hc-hero-stage">
+          <div class="hc-compare" data-compare style="--split:54%;">
+            <div class="hc-compare-base">
+              <img data-compare-before src="<?php echo esc_url($default_compare_item['before_image_url']); ?>" alt="<?php echo esc_attr($default_compare_item['before_image_alt']); ?>">
+            </div>
+
+            <div class="hc-compare-overlay">
+              <img data-compare-after src="<?php echo esc_url($default_compare_item['after_image_url']); ?>" alt="<?php echo esc_attr($default_compare_item['after_image_alt']); ?>">
+            </div>
+
+            <div class="hc-compare-line"></div>
+            <div class="hc-compare-handle"></div>
+
+            <input
+              class="hc-compare-input"
+              type="range"
+              min="0"
+              max="100"
+              value="54"
+              step="0.1"
+              aria-label="Compare before and after image"
+            >
+
+            <div class="hc-compare-badge" data-compare-badge><?php echo wp_kses_post(str_replace(' +', '<br>+', esc_html($default_compare_item['compare_badge_text']))); ?></div>
+
+            <div class="hc-compare-footer">
+              <div class="hc-compare-label" data-compare-before-label><?php echo esc_html($default_compare_item['before_label']); ?></div>
+              <div class="hc-compare-label" data-compare-after-label><?php echo esc_html($default_compare_item['after_label']); ?></div>
+            </div>
+
+            <div class="hc-chip" data-compare-chip><?php echo esc_html($default_compare_item['product_chip_text']); ?></div>
+          </div>
+
+          <?php if (count($compare_items) > 1) : ?>
+            <div class="hc-compare-tabs">
+              <?php foreach ($compare_items as $index => $item) : ?>
+                <button
+                  type="button"
+                  class="hc-compare-tab <?php echo $index === 0 ? 'is-active' : ''; ?>"
+                  data-compare-tab-index="<?php echo esc_attr($index); ?>"
+                >
+                  <?php echo esc_html($item['tab_name']); ?>
+                </button>
+              <?php endforeach; ?>
+            </div>
+          <?php endif; ?>
+        </div>
+      <?php else : ?>
+        <div class="hc-placeholder">
+          Upload both <strong>Before Image</strong> and <strong>After Image</strong> in the Hero Compare Tabs rows.
+        </div>
+      <?php endif; ?>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var hero = document.querySelector('[data-home-hero-v2]');
+    if (!hero) return;
+
+    document.body.classList.add('transparent', 'home-test-hero-active');
+
+    var compareItems = <?php echo wp_json_encode($compare_items); ?>;
+    var compare = hero.querySelector('[data-compare]');
+
+    if (compare) {
+      var input = compare.querySelector('.hc-compare-input');
+      var beforeImage = compare.querySelector('[data-compare-before]');
+      var afterImage = compare.querySelector('[data-compare-after]');
+      var badge = compare.querySelector('[data-compare-badge]');
+      var beforeLabel = compare.querySelector('[data-compare-before-label]');
+      var afterLabel = compare.querySelector('[data-compare-after-label]');
+      var chip = compare.querySelector('[data-compare-chip]');
+      var tabButtons = hero.querySelectorAll('[data-compare-tab-index]');
+
+      var currentIndex = 0;
+      var autoTabDelay = 5000;
+      var autoTabTimer = null;
+
+      function updateSplit(value) {
+        compare.style.setProperty('--split', value + '%');
+        if (input) input.value = value;
+      }
+
+      function startTabProgress(activeIndex) {
+        tabButtons.forEach(function (button, index) {
+          button.classList.remove('is-playing');
+          button.style.setProperty('--hc-tab-duration', autoTabDelay + 'ms');
+          void button.offsetWidth;
+          if (index === activeIndex) {
+            button.classList.add('is-playing');
+          }
+        });
+      }
+
+      function applyCompareItem(index) {
+        if (!compareItems[index]) return;
+
+        currentIndex = index;
+        var item = compareItems[index];
+
+        if (beforeImage) {
+          beforeImage.src = item.before_image_url || '';
+          beforeImage.alt = item.before_image_alt || '';
+        }
+
+        if (afterImage) {
+          afterImage.src = item.after_image_url || '';
+          afterImage.alt = item.after_image_alt || '';
+        }
+
+        if (badge) {
+          badge.innerHTML = (item.compare_badge_text || '').replace(/\s+\+/g, '<br>+');
+        }
+
+        if (beforeLabel) {
+          beforeLabel.textContent = item.before_label || '';
+        }
+
+        if (afterLabel) {
+          afterLabel.textContent = item.after_label || '';
+        }
+
+        if (chip) {
+          chip.textContent = item.product_chip_text || '';
+        }
+
+        tabButtons.forEach(function (button) {
+          var isActive = parseInt(button.getAttribute('data-compare-tab-index'), 10) === index;
+          button.classList.toggle('is-active', isActive);
+        });
+
+        startTabProgress(index);
+      }
+
+      function scheduleNextTab() {
+        if (autoTabTimer) {
+          clearTimeout(autoTabTimer);
+        }
+
+        if (compareItems.length <= 1) return;
+
+        autoTabTimer = setTimeout(function () {
+          var nextIndex = (currentIndex + 1) % compareItems.length;
+          applyCompareItem(nextIndex);
+          scheduleNextTab();
+        }, autoTabDelay);
+      }
+
+      if (input) {
+        updateSplit(input.value);
+
+        input.addEventListener('input', function () {
+          updateSplit(this.value);
+        });
+
+        input.addEventListener('change', function () {
+          updateSplit(this.value);
+        });
+      }
+
+      tabButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var index = parseInt(this.getAttribute('data-compare-tab-index'), 10);
+          applyCompareItem(index);
+          scheduleNextTab();
+        });
+      });
+
+      applyCompareItem(0);
+      scheduleNextTab();
+    }
+
+    if (window.gsap) {
+      var revealItems = hero.querySelectorAll('[data-hero-item]');
+      gsap.from(revealItems, {
+        y: 28,
+        opacity: 0,
+        duration: 0.85,
+        stagger: 0.12,
+        ease: 'power3.out',
+        delay: 0.05
+      });
+
+      var media = hero.querySelector('[data-hero-media]');
+      if (media) {
+        gsap.from(media, {
+          x: 20,
+          opacity: 0,
+          duration: 0.95,
+          ease: 'power3.out',
+          delay: 0.1
+        });
+      }
+    }
+  });
+</script>
+
