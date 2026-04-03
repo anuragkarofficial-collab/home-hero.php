@@ -302,8 +302,11 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     font-weight: 700 !important;
     line-height: 1.1;
     text-decoration: none;
-    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     white-space: nowrap !important;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
   }
 
   .hc-home-hero-v2 .hc-btn:hover {
@@ -339,6 +342,82 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     font-size: 28px !important;
     line-height: 1;
     transform: translateY(-1px);
+  }
+
+  .hc-home-hero-v2 .hc-btn > span {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hc-home-hero-v2 .hc-btn-primary::after {
+    content: "";
+    position: absolute;
+    top: -12%;
+    bottom: -12%;
+    left: -120px;
+    width: 72px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1;
+    transform: skewX(-16deg) translateX(0);
+    background: linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.14) 24%,
+      rgba(255,255,255,0.78) 50%,
+      rgba(255,255,255,0.14) 76%,
+      rgba(255,255,255,0) 100%
+    );
+    box-shadow: 0 0 18px rgba(255,255,255,0.22);
+  }
+
+  .hc-home-hero-v2 .hc-btn-primary.is-cta-scanning::after {
+    animation: hcPrimaryCtaScan 2.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .hc-home-hero-v2 .hc-btn-secondary.is-cta-follow {
+    animation: hcSecondaryCtaAccent 1.25s ease-out forwards;
+  }
+
+  @keyframes hcPrimaryCtaScan {
+    0% {
+      opacity: 0;
+      transform: skewX(-16deg) translateX(0);
+    }
+    12% {
+      opacity: 0.95;
+    }
+    86% {
+      opacity: 0.95;
+    }
+    100% {
+      opacity: 0;
+      transform: skewX(-16deg) translateX(1050%);
+    }
+  }
+
+  @keyframes hcSecondaryCtaAccent {
+    0% {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+    45% {
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 0 1px rgba(94,168,255,0.22),
+        0 10px 24px rgba(94,168,255,0.14);
+    }
+    100% {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hc-home-hero-v2 .hc-btn-primary.is-cta-scanning::after,
+    .hc-home-hero-v2 .hc-btn-secondary.is-cta-follow {
+      animation: none !important;
+    }
   }
 
   .hc-home-hero-v2 .hc-hero-visual {
@@ -862,6 +941,67 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       updateSplit(54);
       applyCompareItem(0);
       scheduleNextTab();
+    }
+
+    var primaryCta = hero.querySelector('.hc-btn-primary');
+    var secondaryCta = hero.querySelector('.hc-btn-secondary');
+    var ctaFollowTimer = null;
+    var ctaVisibilityTriggered = false;
+    var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function restartAnimationClass(element, className) {
+      if (!element) return;
+      element.classList.remove(className);
+      void element.offsetWidth;
+      element.classList.add(className);
+    }
+
+    function runCtaSequence() {
+      if (prefersReducedMotion || !primaryCta) return;
+
+      primaryCta.classList.remove('is-cta-scanning');
+      if (secondaryCta) {
+        secondaryCta.classList.remove('is-cta-follow');
+      }
+
+      restartAnimationClass(primaryCta, 'is-cta-scanning');
+
+      if (secondaryCta) {
+        if (ctaFollowTimer) clearTimeout(ctaFollowTimer);
+
+        ctaFollowTimer = setTimeout(function () {
+          restartAnimationClass(secondaryCta, 'is-cta-follow');
+        }, 2750);
+      }
+    }
+
+    if (!prefersReducedMotion && primaryCta) {
+      if ('IntersectionObserver' in window) {
+        var heroObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+              if (!ctaVisibilityTriggered) {
+                ctaVisibilityTriggered = true;
+                runCtaSequence();
+              }
+            } else {
+              ctaVisibilityTriggered = false;
+            }
+          });
+        }, {
+          threshold: [0, 0.45, 0.7]
+        });
+
+        heroObserver.observe(hero);
+      } else {
+        setTimeout(runCtaSequence, 900);
+      }
+
+      window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+          setTimeout(runCtaSequence, 250);
+        }
+      });
     }
 
     if (window.gsap) {
