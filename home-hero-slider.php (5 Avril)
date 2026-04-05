@@ -447,7 +447,8 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-hero-stage {
-    width: min(100%, 668px);
+    width: 100% !important;
+    max-width: 668px !important;
     min-width: 0 !important;
   }
 
@@ -455,9 +456,11 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     --split: 54%;
     position: relative;
     width: 100% !important;
-    aspect-ratio: 1 / 1.08 !important;
+    max-width: 668px !important;
+    margin: 0 auto !important;
+    aspect-ratio: 668 / 721 !important;
     background: #050608 !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     user-select: none;
     box-shadow: none !important;
   }
@@ -472,10 +475,16 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     height: 100%;
   }
 
+  .hc-home-hero-v2 .hc-compare-base,
+  .hc-home-hero-v2 .hc-compare-overlay {
+    overflow: hidden !important;
+    background: #050608 !important;
+  }
+
   .hc-home-hero-v2 .hc-compare-base img,
   .hc-home-hero-v2 .hc-compare-overlay img {
     display: block;
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center center !important;
     background: #050608 !important;
   }
@@ -674,7 +683,8 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     }
 
     .hc-home-hero-v2 .hc-hero-stage {
-      width: min(100%, 760px);
+      width: 100% !important;
+      max-width: 668px !important;
     }
 
     .hc-home-hero-v2 .hc-chip {
@@ -781,7 +791,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     .hc-home-hero-v2 .hc-compare {
       width: 100% !important;
       max-width: 100% !important;
-      aspect-ratio: 1 / 1.12 !important;
+      aspect-ratio: 668 / 721 !important;
       overflow: hidden !important;
     }
 
