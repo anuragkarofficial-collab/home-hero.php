@@ -194,6 +194,19 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     box-sizing: border-box !important;
   }
 
+  .hc-home-hero-v2,
+  .hc-home-hero-v2 .hc-badge-text,
+  .hc-home-hero-v2 .hc-title,
+  .hc-home-hero-v2 .hc-subtitle,
+  .hc-home-hero-v2 .hc-btn,
+  .hc-home-hero-v2 .hc-compare-badge,
+  .hc-home-hero-v2 .hc-compare-label,
+  .hc-home-hero-v2 .hc-chip,
+  .hc-home-hero-v2 .hc-compare-tab,
+  .hc-home-hero-v2 .hc-placeholder {
+    letter-spacing: 0 !important;
+  }
+
   .hc-home-hero-v2 {
     position: relative;
     overflow: hidden;
@@ -264,7 +277,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     font-size: clamp(42px, 3.9vw, 56px) !important;
     line-height: 1.05 !important;
     font-weight: 800 !important;
-    letter-spacing: -0.035em !important;
+    letter-spacing: 0 !important;
     color: #ffffff !important;
     font-family: "Mont", sans-serif !important;
   }
