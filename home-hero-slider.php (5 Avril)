@@ -213,7 +213,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     background: #050608 !important;
     color: #ffffff;
     min-height: 100svh;
-    padding: 154px 0 78px !important;
+    padding: 96px 0 30px !important;
   }
 
   .hc-home-hero-v2::before {
@@ -227,30 +227,30 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2 .hc-hero-shell {
     position: relative;
     z-index: 2;
-    max-width: 1660px !important;
+    max-width: 1260px !important;
     margin: 0 auto;
-    padding: 0 56px !important;
+    padding: 0 34px !important;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(560px, 690px) !important;
-    gap: 56px !important;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 480px) !important;
+    gap: 24px !important;
     align-items: center !important;
   }
 
   .hc-home-hero-v2 .hc-hero-copy {
-    max-width: 920px !important;
+    max-width: 640px !important;
     min-width: 0 !important;
   }
 
   .hc-home-hero-v2 .hc-badge {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
-    padding: 12px 24px !important;
+    gap: 12px;
+    padding: 9px 18px !important;
     border: 1.5px solid rgba(255,255,255,0.34) !important;
     border-radius: 8px;
     background: transparent !important;
     box-shadow: none !important;
-    margin-bottom: 52px !important;
+    margin-bottom: 22px !important;
   }
 
   .hc-home-hero-v2 .hc-badge-dot {
@@ -263,7 +263,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-badge-text {
-    font-size: 17px !important;
+    font-size: 15px !important;
     line-height: 1.2 !important;
     font-style: italic !important;
     font-weight: 400 !important;
@@ -272,10 +272,10 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-title {
-    margin: 0 0 42px !important;
-    max-width: 980px !important;
-    font-size: clamp(42px, 3.9vw, 56px) !important;
-    line-height: 1.05 !important;
+    margin: 0 0 18px !important;
+    max-width: 640px !important;
+    font-size: clamp(30px, 2.45vw, 42px) !important;
+    line-height: 1.02 !important;
     font-weight: 800 !important;
     letter-spacing: 0 !important;
     color: #ffffff !important;
@@ -288,9 +288,9 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-subtitle {
-    margin: 0 0 34px !important;
-    max-width: 900px !important;
-    font-size: clamp(18px, 1.45vw, 24px) !important;
+    margin: 0 0 20px !important;
+    max-width: 640px !important;
+    font-size: clamp(15px, 0.95vw, 18px) !important;
     line-height: 1.18 !important;
     font-style: italic !important;
     font-weight: 700 !important;
@@ -303,7 +303,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 12px !important;
+    gap: 8px !important;
   }
 
   .hc-home-hero-v2 .hc-btn {
@@ -311,11 +311,11 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    min-height: 66px !important;
-    padding: 16px 20px !important;
+    min-height: 54px !important;
+    padding: 13px 16px !important;
     border-radius: 8px !important;
     border: 1px solid transparent;
-    font-size: 20px !important;
+    font-size: 16px !important;
     font-weight: 700 !important;
     line-height: 1.1;
     text-decoration: none;
@@ -332,7 +332,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-btn-primary {
-    min-width: 500px !important;
+    min-width: 360px !important;
     background: #5ea8ff !important;
     color: #ffffff !important;
     box-shadow: none !important;
@@ -344,7 +344,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-btn-secondary {
-    min-width: 260px !important;
+    min-width: 196px !important;
     background: #ffffff !important;
     color: #111111 !important;
     border-color: rgba(255,255,255,0.12);
@@ -357,7 +357,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-btn-arrow {
-    font-size: 28px !important;
+    font-size: 24px !important;
     line-height: 1;
     transform: translateY(-1px);
   }
@@ -448,7 +448,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 
   .hc-home-hero-v2 .hc-hero-stage {
     width: 100% !important;
-    max-width: 668px !important;
+    max-width: 480px !important;
     min-width: 0 !important;
   }
 
@@ -456,7 +456,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     --split: 54%;
     position: relative;
     width: 100% !important;
-    max-width: 668px !important;
+    max-width: 480px !important;
     margin: 0 auto !important;
     aspect-ratio: 668 / 721 !important;
     background: #050608 !important;
@@ -538,14 +538,14 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2 .hc-compare-badge {
     position: absolute;
     left: var(--split);
-    bottom: 68px !important;
+    bottom: 48px !important;
     transform: translateX(-50%);
     z-index: 4;
     background: #ffffff;
     color: #121212;
     border-radius: 8px !important;
-    padding: 12px 14px !important;
-    font-size: 22px !important;
+    padding: 8px 10px !important;
+    font-size: 15px !important;
     line-height: 1.02 !important;
     font-weight: 400 !important;
     text-align: center;
@@ -557,23 +557,23 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 16px !important;
+    bottom: 10px !important;
     z-index: 4;
-    padding: 0 24px !important;
+    padding: 0 16px !important;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: 20px;
+    gap: 16px;
     pointer-events: none;
   }
 
   .hc-home-hero-v2 .hc-compare-label {
-    font-size: 16px !important;
+    font-size: 13px !important;
     line-height: 1.1 !important;
     color: #ffffff;
     text-shadow: 0 2px 10px rgba(0,0,0,0.55);
     text-align: center;
-    min-width: 130px;
+    min-width: 110px;
   }
 
   .hc-home-hero-v2 .hc-chip {
@@ -594,10 +594,10 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2 .hc-compare-tabs {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 10px;
     align-items: center;
     justify-content: center;
-    margin-top: 28px;
+    margin-top: 16px;
   }
 
   .hc-home-hero-v2 .hc-compare-tab {
@@ -609,9 +609,9 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     background: transparent;
     color: #ffffff;
     border-radius: 8px;
-    min-height: 58px;
-    padding: 12px 28px;
-    font-size: 18px;
+    min-height: 46px;
+    padding: 10px 20px;
+    font-size: 15px;
     font-weight: 700;
     line-height: 1;
     cursor: pointer;
