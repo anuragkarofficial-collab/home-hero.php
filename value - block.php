@@ -102,6 +102,16 @@ $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
     display: block;
     width: 100%;
     height: auto;
+    opacity: 0;
+    transform: translate3d(0, 52px, 0) scale(1.025);
+    transform-origin: center center;
+    will-change: transform, opacity;
+    transition: opacity 1.9s ease, transform 2.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hc-value-block.is-visible .hc-value-left img {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
   }
 
   .hc-value-right-content {
@@ -178,6 +188,14 @@ $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
   .hc-value-cta:hover {
     color: var(--cta-text-color);
     opacity: 0.92;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hc-value-left img {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 
   @media (max-width: 991px) {
@@ -289,3 +307,32 @@ $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
 
   </div>
 </section>
+
+<script>
+  (function (script) {
+    var block = script.previousElementSibling;
+    if (!block || !block.classList.contains('hc-value-block')) return;
+
+    if (!('IntersectionObserver' in window)) {
+      block.classList.add('is-visible');
+      return;
+    }
+
+    if (!window.hcValueBlockImageObserver) {
+      window.hcValueBlockImageObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          } else {
+            entry.target.classList.remove('is-visible');
+          }
+        });
+      }, {
+        threshold: 0.18,
+        rootMargin: '0px 0px -6% 0px'
+      });
+    }
+
+    window.hcValueBlockImageObserver.observe(block);
+  })(document.currentScript);
+</script>
