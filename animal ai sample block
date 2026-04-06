@@ -1,0 +1,265 @@
+<?php
+$title = get_sub_field('title');
+$title_tag = get_sub_field('title_tag') ?: 'h2';
+$subtitle = get_sub_field('subtitle');
+$subtitle_size = get_sub_field('subtitle_size') ?: 'h2';
+$tags = get_sub_field('tags');
+$description_line = get_sub_field('description_line');
+$image = get_sub_field('image');
+$image_labels = get_sub_field('image_labels');
+
+$background_colour = sanitize_hex_color(get_sub_field('background_colour')) ?: 'transparent';
+$title_color = sanitize_hex_color(get_sub_field('title_color')) ?: '#222222';
+$subtitle_color = sanitize_hex_color(get_sub_field('subtitle_color')) ?: '#222222';
+$tag_background_color = sanitize_hex_color(get_sub_field('tag_background_color')) ?: '#666666';
+$tag_text_color = sanitize_hex_color(get_sub_field('tag_text_color')) ?: '#ffffff';
+$description_line_color = sanitize_hex_color(get_sub_field('description_line_color')) ?: '#444444';
+
+$allowed_title_tags = array('h1', 'h2', 'h3');
+if (!in_array($title_tag, $allowed_title_tags, true)) {
+  $title_tag = 'h2';
+}
+
+$allowed_subtitle_sizes = array('h1', 'h2', 'h3', 'p');
+if (!in_array($subtitle_size, $allowed_subtitle_sizes, true)) {
+  $subtitle_size = 'h2';
+}
+
+$block_id = 'hc-animal-ai-simple-block-' . wp_unique_id();
+?>
+
+<section id="<?php echo esc_attr($block_id); ?>" class="hc-animal-ai-simple-block" style="background-color: <?php echo esc_attr($background_colour); ?>;">
+  <style>
+    #<?php echo esc_attr($block_id); ?> {
+      padding: clamp(40px, 6vw, 88px) 0;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__title {
+      margin: 0 0 18px;
+      font-size: clamp(34px, 4vw, 60px);
+      line-height: 1.05;
+      font-weight: 700;
+      color: <?php echo esc_attr($title_color); ?>;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle {
+      margin: 0 0 22px;
+      color: <?php echo esc_attr($subtitle_color); ?>;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle p,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle h1,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle h2,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h1,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h1 p {
+      font-size: clamp(30px, 3vw, 48px);
+      line-height: 1.12;
+      font-weight: 700;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h2,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h2 p {
+      font-size: clamp(24px, 2.6vw, 34px);
+      line-height: 1.18;
+      font-weight: 700;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h3,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h3 p {
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.24;
+      font-weight: 700;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-p,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-p p {
+      font-size: 18px;
+      line-height: 1.55;
+      font-weight: 400;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 10px;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: <?php echo esc_attr($tag_background_color); ?>;
+      color: <?php echo esc_attr($tag_text_color); ?>;
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__description {
+      margin: 0 0 26px;
+      font-size: 14px;
+      line-height: 1.45;
+      color: <?php echo esc_attr($description_line_color); ?>;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__image-wrap {
+      margin: 0;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__labels {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+      align-items: start;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label {
+      font-size: clamp(16px, 1.8vw, 22px);
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label > *:first-child {
+      margin-top: 0;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label > *:last-child {
+      margin-bottom: 0;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label p {
+      margin: 0;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label:nth-child(1) {
+      text-align: center;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label:nth-child(2) {
+      text-align: center;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label:nth-child(3) {
+      text-align: center;
+    }
+
+    @media (max-width: 767px) {
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__inner {
+        width: min(1120px, calc(100% - 24px));
+      }
+
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__labels {
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label {
+        font-size: 13px;
+        line-height: 1.25;
+      }
+    }
+  </style>
+
+  <div class="hc-animal-ai-simple-block__inner">
+
+    <?php if ($title) : ?>
+      <<?php echo esc_attr($title_tag); ?> class="hc-animal-ai-simple-block__title">
+        <?php echo esc_html($title); ?>
+      </<?php echo esc_attr($title_tag); ?>>
+    <?php endif; ?>
+
+    <?php if ($subtitle) : ?>
+      <div class="hc-animal-ai-simple-block__subtitle is-<?php echo esc_attr($subtitle_size); ?>">
+        <?php echo wp_kses_post($subtitle); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($tags) : ?>
+      <div class="hc-animal-ai-simple-block__tags">
+        <?php foreach ($tags as $tag) : ?>
+          <?php if (!empty($tag['tag_text'])) : ?>
+            <span class="hc-animal-ai-simple-block__tag">
+              <?php echo esc_html($tag['tag_text']); ?>
+            </span>
+          <?php endif; ?>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($description_line) : ?>
+      <div class="hc-animal-ai-simple-block__description">
+        <?php echo esc_html($description_line); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($image) : ?>
+      <figure class="hc-animal-ai-simple-block__image-wrap">
+        <?php
+        if (!empty($image['ID'])) {
+          echo wp_get_attachment_image(
+            $image['ID'],
+            'full',
+            false,
+            array(
+              'class' => 'hc-animal-ai-simple-block__image',
+              'alt'   => !empty($image['alt']) ? $image['alt'] : $title,
+              'loading' => 'lazy',
+            )
+          );
+        } elseif (!empty($image['url'])) {
+          ?>
+          <img
+            class="hc-animal-ai-simple-block__image"
+            src="<?php echo esc_url($image['url']); ?>"
+            alt="<?php echo esc_attr(!empty($image['alt']) ? $image['alt'] : $title); ?>"
+            loading="lazy"
+          >
+          <?php
+        }
+        ?>
+      </figure>
+    <?php endif; ?>
+
+    <?php if ($image_labels) : ?>
+      <div class="hc-animal-ai-simple-block__labels">
+        <?php foreach ($image_labels as $label) : ?>
+          <?php
+          $label_text = $label['label_text'] ?? '';
+          $label_color = sanitize_hex_color($label['label_color'] ?? '') ?: '#222222';
+
+          if (!$label_text) {
+            continue;
+          }
+          ?>
+          <div class="hc-animal-ai-simple-block__label" style="color: <?php echo esc_attr($label_color); ?>;">
+            <?php echo wp_kses_post($label_text); ?>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
+
+  </div>
+</section>
