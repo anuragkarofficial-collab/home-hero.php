@@ -20,22 +20,40 @@ $badge_bg_color = get_sub_field('badge_bg_color') ?: $accent_light_color;
 $cta_bg_color = get_sub_field('cta_bg_color') ?: $accent_color;
 $cta_text_color = get_sub_field('cta_text_color') ?: '#ffffff';
 $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
+
+$dog_icon_src = 'https://hawkcell.com/wp-content/uploads/2026/04/dog-sitting-linear-icon-loyal-600nw-2668141527.webp';
+$horse_icon_src = 'https://hawkcell.com/wp-content/uploads/2026/04/image.png';
+
+$get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src) {
+  $tag_text = is_string($tag_text) ? trim(strtolower($tag_text)) : '';
+
+  if (stripos($tag_text, 'small animal') !== false || stripos($tag_text, 'dog') !== false) {
+    return '<span class="hc-value-tag-icon" aria-hidden="true"><img src="' . esc_url($dog_icon_src) . '" alt="" loading="lazy"></span>';
+  }
+
+  if (stripos($tag_text, 'equine') !== false || stripos($tag_text, 'horse') !== false) {
+    return '<span class="hc-value-tag-icon" aria-hidden="true"><img src="' . esc_url($horse_icon_src) . '" alt="" loading="lazy"></span>';
+  }
+
+  return '';
+};
 ?>
 
 <style>
   .hc-value-block {
-    padding: 80px 0;
+    padding: 64px 0;
     background: var(--section-bg-color);
+    letter-spacing: 0.01em;
   }
 
   .hc-value-container {
-    max-width: 1320px;
+    max-width: 1080px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 32px;
   }
 
   .hc-value-header {
-    margin-bottom: 28px;
+    margin-bottom: 22px;
   }
 
   .hc-value-eyebrow {
@@ -49,52 +67,75 @@ $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
 
   .hc-value-title {
     margin: 0;
-    font-size: clamp(38px, 4vw, 62px);
+    font-size: clamp(30px, 3.2vw, 50px);
     line-height: 0.98;
     font-weight: 800;
     color: #242424;
     font-family: var(--title-font), sans-serif;
+    letter-spacing: 0.01em;
   }
 
   .hc-value-meta {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 14px;
     flex-wrap: wrap;
-    margin-bottom: 34px;
+    margin-bottom: 28px;
   }
 
   .hc-value-badge {
     display: inline-flex;
     align-items: center;
-    min-height: 42px;
-    padding: 8px 18px;
+    min-height: 36px;
+    padding: 7px 16px;
     border-radius: 12px;
     background: var(--badge-bg-color);
     color: var(--badge-text-color);
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
     line-height: 1;
+    letter-spacing: 0.01em;
   }
 
   .hc-value-tags {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 18px;
     flex-wrap: wrap;
   }
 
   .hc-value-tag {
-    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
     font-weight: 700;
     color: #2c2c2c;
     line-height: 1.2;
+    letter-spacing: 0.01em;
+  }
+
+  .hc-value-tag-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    line-height: 0;
+  }
+
+  .hc-value-tag-icon img {
+    display: block;
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
   }
 
   .hc-value-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-    gap: 70px;
+    gap: 56px;
     align-items: start;
   }
 
@@ -122,47 +163,66 @@ $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
   .hc-value-right-content h1,
   .hc-value-right-content h2,
   .hc-value-right-content h3 {
-    margin: 0 0 24px;
+    margin: 0 0 20px;
     line-height: 1.02;
     font-weight: 800;
     font-family: 'Mont', sans-serif;
+    letter-spacing: 0.01em;
   }
 
   .hc-value-right-content h1 {
-    font-size: clamp(36px, 3.2vw, 58px);
+    font-size: clamp(29px, 2.7vw, 46px);
   }
 
   .hc-value-right-content h2 {
-    font-size: clamp(32px, 3vw, 54px);
+    font-size: clamp(26px, 2.5vw, 43px);
   }
 
   .hc-value-right-content h3 {
-    font-size: clamp(24px, 2.2vw, 34px);
+    font-size: clamp(20px, 1.8vw, 28px);
   }
 
   .hc-value-right-content p {
-    margin: 0 0 18px;
-    font-size: 18px;
+    margin: 0 0 16px;
+    font-size: 16px;
     line-height: 1.55;
     color: #262626;
     font-family: 'Rubik', sans-serif;
+    letter-spacing: 0.012em;
   }
 
-  .hc-value-right-content ul,
+  .hc-value-right-content ul {
+    list-style: disc !important;
+    list-style-position: outside !important;
+    margin: 0 0 16px 24px !important;
+    padding-left: 0 !important;
+  }
+
   .hc-value-right-content ol {
-    margin: 0 0 18px 22px;
-    padding: 0;
+    list-style: decimal !important;
+    list-style-position: outside !important;
+    margin: 0 0 16px 24px !important;
+    padding-left: 0 !important;
   }
 
   .hc-value-right-content li {
-    margin: 0 0 10px;
-    font-size: 18px;
+    display: list-item !important;
+    margin: 0 0 8px !important;
+    padding-left: 0 !important;
+    font-size: 16px;
     line-height: 1.55;
     color: #262626;
+    letter-spacing: 0.012em;
+  }
+
+  .hc-value-right-content ul li::marker,
+  .hc-value-right-content ol li::marker {
+    color: #262626 !important;
   }
 
   .hc-value-right-content a {
     text-decoration: underline;
+    letter-spacing: 0.012em;
   }
 
   .hc-value-right-content strong {
@@ -173,16 +233,17 @@ $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-top: 24px;
-    min-height: 56px;
-    padding: 14px 22px;
+    margin-top: 20px;
+    min-height: 48px;
+    padding: 12px 20px;
     border-radius: 8px;
     background: var(--cta-bg-color);
     color: var(--cta-text-color);
     text-decoration: none;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
     line-height: 1.1;
+    letter-spacing: 0.012em;
   }
 
   .hc-value-cta:hover {
@@ -200,7 +261,7 @@ $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
 
   @media (max-width: 991px) {
     .hc-value-block {
-      padding: 60px 0;
+      padding: 56px 0;
     }
 
     .hc-value-container {
@@ -209,7 +270,7 @@ $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
 
     .hc-value-grid {
       grid-template-columns: 1fr;
-      gap: 36px;
+      gap: 32px;
     }
   }
 
@@ -237,6 +298,22 @@ $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
     .hc-value-right-content p,
     .hc-value-right-content li {
       font-size: 17px;
+    }
+
+    .hc-value-right-content ul,
+    .hc-value-right-content ol {
+      margin: 0 0 16px 22px !important;
+    }
+
+    .hc-value-tag-icon {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+    }
+
+    .hc-value-tag-icon img {
+      width: 24px;
+      height: 24px;
     }
 
     .hc-value-cta {
@@ -276,7 +353,10 @@ $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
         <div class="hc-value-tags">
           <?php foreach ($tags as $tag) : ?>
             <?php if (!empty($tag['tag_text'])) : ?>
-              <span class="hc-value-tag"><?php echo esc_html($tag['tag_text']); ?></span>
+              <span class="hc-value-tag">
+                <?php echo $get_tag_icon($tag['tag_text']); ?>
+                <span class="hc-value-tag-label"><?php echo esc_html($tag['tag_text']); ?></span>
+              </span>
             <?php endif; ?>
           <?php endforeach; ?>
         </div>
