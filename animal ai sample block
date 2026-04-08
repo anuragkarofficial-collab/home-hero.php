@@ -32,6 +32,9 @@ $block_id = 'hc-animal-ai-simple-block-' . wp_unique_id();
   <style>
     #<?php echo esc_attr($block_id); ?> {
       padding: clamp(30px, 4.5vw, 66px) 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__inner {
@@ -41,15 +44,22 @@ $block_id = 'hc-animal-ai-simple-block-' . wp_unique_id();
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__title {
       margin: 0 0 14px;
-      font-size: clamp(26px, 3vw, 45px);
-      line-height: 1.05;
-      font-weight: 700;
+      font-size: clamp(30px, 3vw, 45px);
+      line-height: 1.25;
+      font-weight: 400;
+      letter-spacing: -0.055em;
+      font-family: 'Mont', sans-serif;
       color: <?php echo esc_attr($title_color); ?>;
+      position: relative;
+      left: -140px;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle {
       margin: 0 0 16px;
       color: <?php echo esc_attr($subtitle_color); ?>;
+      position: relative;
+      left: -140px;
+      font-family: 'Rubik', sans-serif;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle,
@@ -59,27 +69,28 @@ $block_id = 'hc-animal-ai-simple-block-' . wp_unique_id();
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle h3 {
       margin-top: 0;
       margin-bottom: 0;
+      font-family: 'Rubik', sans-serif;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h1,
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h1 p {
       font-size: clamp(23px, 2.25vw, 36px);
       line-height: 1.12;
-      font-weight: 700;
+      font-weight: 500;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h2,
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h2 p {
       font-size: clamp(18px, 1.95vw, 26px);
       line-height: 1.18;
-      font-weight: 700;
+      font-weight: 500;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h3,
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h3 p {
       font-size: clamp(15px, 1.5vw, 21px);
       line-height: 1.24;
-      font-weight: 700;
+      font-weight: 500;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-p,
@@ -109,6 +120,7 @@ $block_id = 'hc-animal-ai-simple-block-' . wp_unique_id();
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.02em;
+      font-family: 'Rubik', sans-serif;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__description {
@@ -116,6 +128,7 @@ $block_id = 'hc-animal-ai-simple-block-' . wp_unique_id();
       font-size: 11px;
       line-height: 1.45;
       color: <?php echo esc_attr($description_line_color); ?>;
+      font-family: 'Rubik', sans-serif;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__image-wrap {
@@ -140,6 +153,7 @@ $block_id = 'hc-animal-ai-simple-block-' . wp_unique_id();
       font-size: clamp(12px, 1.35vw, 16px);
       line-height: 1.3;
       text-align: center;
+      font-family: 'Rubik', sans-serif;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label > *:first-child {
@@ -152,6 +166,7 @@ $block_id = 'hc-animal-ai-simple-block-' . wp_unique_id();
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label p {
       margin: 0;
+      font-family: 'Rubik', sans-serif;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label:nth-child(1) {
@@ -174,14 +189,17 @@ $block_id = 'hc-animal-ai-simple-block-' . wp_unique_id();
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__title {
         margin: 0 0 14px;
         font-size: clamp(26px, 7vw, 34px);
-        line-height: 1.05;
-        font-weight: 700;
-        letter-spacing: -0.04em;
+        line-height: 0.98;
+        font-weight: 400;
+        letter-spacing: -0.035em;
+        font-family: 'Mont', sans-serif;
+        left: 0;
       }
 
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle {
         margin: 0 0 24px;
         letter-spacing: -0.02em;
+        left: 0;
       }
 
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h1,
