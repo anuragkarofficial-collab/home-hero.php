@@ -256,7 +256,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     border-radius: 8px;
     background: transparent !important;
     box-shadow: none !important;
-    margin-bottom: 32px !important;
+    margin-bottom: 48px !important;
   }
 
   .hc-home-hero-v2 .hc-badge-dot {
@@ -281,12 +281,12 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2 .hc-title *,
   .hc-home-hero-v2 h1.hc-title,
   .hc-home-hero-v2 h1.hc-title * {
-    margin: 0 0 26px !important;
+    margin: 0 0 48px !important;
     max-width: 640px !important;
-    font-size: clamp(30px, 2.45vw, 42px) !important;
-    line-height: 0.94 !important;
+    font-size: clamp(42px, 2.7vw, 45px) !important;
+    line-height: 1.25 !important;
     font-weight: 400 !important;
-    letter-spacing: -0.045em !important;
+    letter-spacing: -0.055em !important;
     color: #ffffff !important;
     font-family: "Mont", sans-serif !important;
     font-style: normal !important;
@@ -299,9 +299,9 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-subtitle {
-    margin: 0 0 34px !important;
+    margin: 0 0 48px !important;
     max-width: 640px !important;
-    font-size: clamp(15px, 0.95vw, 18px) !important;
+    font-size: clamp(25px, 0.95vw, 27px) !important;
     line-height: 1.18 !important;
     font-style: italic !important;
     font-weight: 700 !important;
@@ -495,7 +495,9 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2 .hc-compare-base img,
   .hc-home-hero-v2 .hc-compare-overlay img {
     display: block;
-    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
     object-position: center center !important;
     background: #050608 !important;
   }
@@ -768,8 +770,8 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       margin-bottom: 22px !important;
       max-width: 100% !important;
       font-family: "Mont", sans-serif !important;
-      font-size: clamp(30px, 9.2vw, 40px) !important;
-      line-height: 0.92 !important;
+      font-size: clamp(36px, 2.7vw, 39px) !important;
+      line-height: 1.25 !important;
       font-weight: 400 !important;
       letter-spacing: -0.05em !important;
       font-style: normal !important;
@@ -789,7 +791,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       margin-bottom: 24px !important;
       max-width: 100% !important;
       font-family: "Mont", sans-serif !important;
-      font-size: 16px !important;
+      font-size: 20px !important;
       line-height: 1.15 !important;
       font-weight: 600 !important;
       white-space: normal !important;
