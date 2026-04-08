@@ -1,6 +1,7 @@
 <?php
 $hero_badge_text = get_field('hero_badge_text') ?: 'The first non-diagnostic AI that understands animal anatomy';
 $hero_title = get_field('hero_title') ?: 'Sharper Images. Faster Scans. Higher ROI.';
+
 $hero_subtitle = get_field('hero_subtitle') ?: 'The Universal Standard of Veterinary Imaging';
 
 $hero_primary_cta_text = get_field('hero_primary_cta_text') ?: 'See the Performance. Drop Your Images';
@@ -102,7 +103,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 ?>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700&family=Poppins:wght@400;500;600;700&display=swap');
 
   body.home-test-hero-active .site-header {
     background: transparent !important;
@@ -197,6 +198,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2,
   .hc-home-hero-v2 .hc-badge-text,
   .hc-home-hero-v2 .hc-title,
+  .hc-home-hero-v2 .hc-title *,
   .hc-home-hero-v2 .hc-subtitle,
   .hc-home-hero-v2 .hc-btn,
   .hc-home-hero-v2 .hc-compare-badge,
@@ -205,6 +207,10 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2 .hc-compare-tab,
   .hc-home-hero-v2 .hc-placeholder {
     letter-spacing: 0 !important;
+  }
+
+  .hc-home-hero-v2 .hc-title .hc-title-line {
+    display: inline;
   }
 
   .hc-home-hero-v2 {
@@ -250,7 +256,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     border-radius: 8px;
     background: transparent !important;
     box-shadow: none !important;
-    margin-bottom: 22px !important;
+    margin-bottom: 32px !important;
   }
 
   .hc-home-hero-v2 .hc-badge-dot {
@@ -271,15 +277,20 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     white-space: nowrap !important;
   }
 
-  .hc-home-hero-v2 .hc-title {
-    margin: 0 0 18px !important;
+  .hc-home-hero-v2 .hc-title,
+  .hc-home-hero-v2 .hc-title *,
+  .hc-home-hero-v2 h1.hc-title,
+  .hc-home-hero-v2 h1.hc-title * {
+    margin: 0 0 26px !important;
     max-width: 640px !important;
     font-size: clamp(30px, 2.45vw, 42px) !important;
-    line-height: 1.02 !important;
-    font-weight: 800 !important;
-    letter-spacing: 0 !important;
+    line-height: 0.94 !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.045em !important;
     color: #ffffff !important;
     font-family: "Mont", sans-serif !important;
+    font-style: normal !important;
+    text-transform: none !important;
   }
 
   .hc-home-hero-v2 .hc-title br {
@@ -288,7 +299,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-subtitle {
-    margin: 0 0 20px !important;
+    margin: 0 0 34px !important;
     max-width: 640px !important;
     font-size: clamp(15px, 0.95vw, 18px) !important;
     line-height: 1.18 !important;
@@ -718,10 +729,11 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     .hc-home-hero-v2 .hc-hero-shell {
       grid-template-columns: minmax(0, 1fr) !important;
       padding: 0 18px !important;
-      gap: 28px !important;
+      gap: 22px !important;
       width: 100% !important;
       max-width: 100% !important;
       min-width: 0 !important;
+      align-items: start !important;
     }
 
     .hc-home-hero-v2 .hc-hero-copy,
@@ -742,29 +754,52 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     }
 
     .hc-home-hero-v2 .hc-badge-text {
-      font-size: 13px !important;
-      line-height: 1.3 !important;
+      font-family: "Mont", sans-serif !important;
+      font-size: 12.5px !important;
+      line-height: 1.25 !important;
+      font-weight: 500 !important;
       white-space: normal !important;
     }
 
-    .hc-home-hero-v2 .hc-title {
-      margin-bottom: 16px !important;
+    .hc-home-hero-v2 .hc-title,
+    .hc-home-hero-v2 .hc-title *,
+    .hc-home-hero-v2 h1.hc-title,
+    .hc-home-hero-v2 h1.hc-title * {
+      margin-bottom: 22px !important;
       max-width: 100% !important;
-      font-size: clamp(34px, 11vw, 46px) !important;
-      line-height: 1.02 !important;
+      font-family: "Mont", sans-serif !important;
+      font-size: clamp(30px, 9.2vw, 40px) !important;
+      line-height: 0.92 !important;
+      font-weight: 400 !important;
+      letter-spacing: -0.05em !important;
+      font-style: normal !important;
+      text-transform: none !important;
+    }
+
+    .hc-home-hero-v2 .hc-title .hc-title-line {
+      display: block !important;
+      margin: 0 0 0.42em 0 !important;
+    }
+
+    .hc-home-hero-v2 .hc-title .hc-title-line:last-child {
+      margin-bottom: 0 !important;
     }
 
     .hc-home-hero-v2 .hc-subtitle {
       margin-bottom: 24px !important;
       max-width: 100% !important;
-      font-size: 18px !important;
-      line-height: 1.2 !important;
+      font-family: "Mont", sans-serif !important;
+      font-size: 16px !important;
+      line-height: 1.15 !important;
+      font-weight: 600 !important;
       white-space: normal !important;
     }
 
     .hc-home-hero-v2 .hc-buttons {
       flex-direction: column !important;
       align-items: stretch !important;
+      gap: 12px !important;
+      margin-top: 0 !important;
     }
 
     .hc-home-hero-v2 .hc-btn,
@@ -953,6 +988,79 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 
     updateHeaderScrollState();
     window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
+
+    var heroShell = hero.querySelector('.hc-hero-shell');
+    var heroCopy = hero.querySelector('.hc-hero-copy');
+    var heroVisual = hero.querySelector('.hc-hero-visual');
+    var buttons = hero.querySelector('.hc-buttons');
+    var title = hero.querySelector('.hc-title');
+
+    var buttonsOriginalParent = buttons ? buttons.parentNode : null;
+    var buttonsOriginalNextSibling = buttons ? buttons.nextSibling : null;
+    var originalTitleHtml = title ? title.innerHTML : '';
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function getTitleLinesFromHtml(html) {
+      var temp = document.createElement('div');
+      temp.innerHTML = html;
+      var text = (temp.textContent || temp.innerText || '').replace(/\s+/g, ' ').trim();
+
+      if (!text) return [];
+
+      var parts = text.match(/[^.!?]+[.!?]?/g) || [];
+      return parts
+        .map(function (part) {
+          return part.replace(/\s+/g, ' ').trim();
+        })
+        .filter(function (part) {
+          return part.length > 0;
+        });
+    }
+
+    function updateMobileHeroLayout() {
+      var isMobile = window.innerWidth <= 767;
+
+      if (isMobile) {
+        if (buttons && heroVisual && buttons.parentNode !== heroShell) {
+          heroVisual.insertAdjacentElement('afterend', buttons);
+        }
+
+        if (title && originalTitleHtml) {
+          var lines = getTitleLinesFromHtml(originalTitleHtml);
+
+          if (lines.length === 3) {
+            title.innerHTML = lines.map(function (line) {
+              return '<span class="hc-title-line">' + escapeHtml(line) + '</span>';
+            }).join('');
+          } else {
+            title.innerHTML = originalTitleHtml;
+          }
+        }
+      } else {
+        if (buttons && buttonsOriginalParent && buttons.parentNode !== buttonsOriginalParent) {
+          if (buttonsOriginalNextSibling && buttonsOriginalNextSibling.parentNode === buttonsOriginalParent) {
+            buttonsOriginalParent.insertBefore(buttons, buttonsOriginalNextSibling);
+          } else {
+            buttonsOriginalParent.appendChild(buttons);
+          }
+        }
+
+        if (title && title.innerHTML !== originalTitleHtml) {
+          title.innerHTML = originalTitleHtml;
+        }
+      }
+    }
+
+    updateMobileHeroLayout();
+    window.addEventListener('resize', updateMobileHeroLayout);
 
     var compareItems = <?php echo wp_json_encode($compare_items); ?>;
     var compare = hero.querySelector('[data-compare]');
