@@ -21,18 +21,18 @@ $cta_bg_color = get_sub_field('cta_bg_color') ?: $accent_color;
 $cta_text_color = get_sub_field('cta_text_color') ?: '#ffffff';
 $section_bg_color = get_sub_field('section_bg_color') ?: '#f3f3f3';
 
-$dog_icon_src = 'https://hawkcell.com/wp-content/uploads/2026/04/dog-sitting-linear-icon-loyal-600nw-2668141527.webp';
-$horse_icon_src = 'https://hawkcell.com/wp-content/uploads/2026/04/image.png';
+$dog_icon_src = 'https://hawkcell.com/wp-content/uploads/2026/04/dog-transparent.png';
+$horse_icon_src = 'https://hawkcell.com/wp-content/uploads/2026/04/horse-transparent.png';
 
 $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src) {
   $tag_text = is_string($tag_text) ? trim(strtolower($tag_text)) : '';
 
   if (stripos($tag_text, 'small animal') !== false || stripos($tag_text, 'dog') !== false) {
-    return '<span class="hc-value-tag-icon" aria-hidden="true"><img src="' . esc_url($dog_icon_src) . '" alt="" loading="lazy"></span>';
+    return '<span class="hc-value-tag-icon hc-value-tag-icon--dog" aria-hidden="true"><img src="' . esc_url($dog_icon_src) . '" alt="" loading="lazy"></span>';
   }
 
   if (stripos($tag_text, 'equine') !== false || stripos($tag_text, 'horse') !== false) {
-    return '<span class="hc-value-tag-icon" aria-hidden="true"><img src="' . esc_url($horse_icon_src) . '" alt="" loading="lazy"></span>';
+    return '<span class="hc-value-tag-icon hc-value-tag-icon--horse" aria-hidden="true"><img src="' . esc_url($horse_icon_src) . '" alt="" loading="lazy"></span>';
   }
 
   return '';
@@ -41,7 +41,7 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
 
 <style>
   .hc-value-block {
-    padding: 64px 0;
+    padding: 36px 0;
     background: var(--section-bg-color);
     letter-spacing: 0.01em;
   }
@@ -54,25 +54,34 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
 
   .hc-value-header {
     margin-bottom: 22px;
+    position: relative;
+    left: -48px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .hc-value-eyebrow {
+  .hc-value-block .hc-value-header .hc-value-eyebrow {
+    display: block;
     font-size: 14px;
-    line-height: 1.1;
+    line-height: 1;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: #2b2b2b;
-    margin-bottom: 8px;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Mont', sans-serif !important;
+    font-weight: 300 !important;
   }
 
-  .hc-value-title {
-    margin: 0;
-    font-size: clamp(30px, 3.2vw, 50px);
-    line-height: 0.98;
-    font-weight: 800;
+  .hc-value-block .hc-value-header .hc-value-title {
+    margin: 0 !important;
+    font-size: 45px;
+    line-height: 1.25;
+    font-weight: 400;
     color: #242424;
-    font-family: var(--title-font), sans-serif;
-    letter-spacing: 0.01em;
+    font-family: 'Mont', sans-serif;
+    letter-spacing: -0.055em;
   }
 
   .hc-value-meta {
@@ -88,7 +97,7 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
     align-items: center;
     min-height: 36px;
     padding: 7px 16px;
-    border-radius: 12px;
+    border-radius: 7px;
     background: var(--badge-bg-color);
     color: var(--badge-text-color);
     font-size: 15px;
@@ -132,6 +141,28 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
     object-fit: contain;
   }
 
+  .hc-value-tag-icon--dog {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+  }
+
+  .hc-value-tag-icon--dog img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hc-value-tag-icon--horse {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+  }
+
+  .hc-value-tag-icon--horse img {
+    width: 26px;
+    height: 26px;
+  }
+
   .hc-value-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
@@ -158,28 +189,40 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
   .hc-value-right-content {
     display: block;
     color: #262626;
+    font-family: 'Mont', sans-serif;
   }
 
   .hc-value-right-content h1,
   .hc-value-right-content h2,
   .hc-value-right-content h3 {
     margin: 0 0 20px;
-    line-height: 1.02;
-    font-weight: 800;
-    font-family: 'Mont', sans-serif;
-    letter-spacing: 0.01em;
+    line-height: 0.94 !important;
+    font-weight: 300 !important;
+    font-family: 'Mont', sans-serif !important;
+    letter-spacing: -0.055em !important;
+    color: #242424;
+    font-style: normal !important;
+    text-transform: none !important;
   }
 
   .hc-value-right-content h1 {
-    font-size: clamp(29px, 2.7vw, 46px);
+    font-size: 42px;
   }
 
   .hc-value-right-content h2 {
-    font-size: clamp(26px, 2.5vw, 43px);
+    font-size: 35px;
   }
 
-  .hc-value-right-content h3 {
-    font-size: clamp(20px, 1.8vw, 28px);
+  .hc-value-block .hc-value-right .hc-value-right-content h3,
+  .hc-value-block .hc-value-right .hc-value-right-content h3 strong,
+  .hc-value-block .hc-value-right .hc-value-right-content h3 span {
+    font-size: clamp(20px, 1.8vw, 28px) !important;
+    line-height: 1.25 !important;
+    font-weight: 400 !important;
+    font-family: 'Mont', sans-serif !important;
+    letter-spacing: -0.055em !important;
+    font-style: normal !important;
+    text-transform: none !important;
   }
 
   .hc-value-right-content p {
@@ -187,8 +230,8 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
     font-size: 16px;
     line-height: 1.55;
     color: #262626;
-    font-family: 'Rubik', sans-serif;
-    letter-spacing: 0.012em;
+    font-family: 'Mont', sans-serif;
+    letter-spacing: 0.055em;
   }
 
   .hc-value-right-content ul {
@@ -212,6 +255,7 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
     font-size: 16px;
     line-height: 1.55;
     color: #262626;
+    font-family: 'Mont', sans-serif;
     letter-spacing: 0.012em;
   }
 
@@ -222,7 +266,8 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
 
   .hc-value-right-content a {
     text-decoration: underline;
-    letter-spacing: 0.012em;
+    letter-spacing: -0.055em;
+    font-family: 'Mont', sans-serif;
   }
 
   .hc-value-right-content strong {
@@ -244,6 +289,7 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: 0.012em;
+    font-family: 'Mont', sans-serif;
   }
 
   .hc-value-cta:hover {
@@ -261,7 +307,7 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
 
   @media (max-width: 991px) {
     .hc-value-block {
-      padding: 56px 0;
+      padding: 11px 0;
     }
 
     .hc-value-container {
@@ -279,20 +325,32 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
       padding: 0 18px;
     }
 
+    .hc-value-header {
+      left: 0;
+    }
+
     .hc-value-title {
-      font-size: 42px;
+      font-size: clamp(26px, 7vw, 34px);
     }
 
     .hc-value-right-content h1 {
-      font-size: 38px;
+      font-size: clamp(26px, 6.6vw, 38px);
     }
 
     .hc-value-right-content h2 {
-      font-size: 34px;
+      font-size: clamp(22px, 6vw, 34px);
     }
 
-    .hc-value-right-content h3 {
-      font-size: 26px;
+    .hc-value-block .hc-value-right .hc-value-right-content h3,
+    .hc-value-block .hc-value-right .hc-value-right-content h3 strong,
+    .hc-value-block .hc-value-right .hc-value-right-content h3 span {
+      font-size: clamp(19px, 5.2vw, 26px) !important;
+      line-height: 1.25 !important;
+      font-weight: 400 !important;
+      font-family: 'Mont', sans-serif !important;
+      letter-spacing: -0.055em !important;
+      font-style: normal !important;
+      text-transform: none !important;
     }
 
     .hc-value-right-content p,
@@ -312,6 +370,28 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
     }
 
     .hc-value-tag-icon img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .hc-value-tag-icon--dog {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 28px;
+    }
+
+    .hc-value-tag-icon--dog img {
+      width: 44px;
+      height: 44px;
+    }
+
+    .hc-value-tag-icon--horse {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+    }
+
+    .hc-value-tag-icon--horse img {
       width: 24px;
       height: 24px;
     }
