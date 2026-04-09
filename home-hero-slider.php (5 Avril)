@@ -3,6 +3,15 @@ $hero_badge_text = get_field('hero_badge_text') ?: 'The first non-diagnostic AI 
 $hero_title = get_field('hero_title') ?: 'Sharper Images. Faster Scans. Higher ROI.';
 
 $hero_subtitle = get_field('hero_subtitle') ?: 'The Universal Standard of Veterinary Imaging';
+$hero_subtitle_html = esc_html($hero_subtitle);
+
+if (strpos($hero_subtitle, 'Veterinary Imaging') !== false) {
+  $hero_subtitle_html = str_replace(
+    'Veterinary Imaging',
+    '<span class="hc-subtitle-highlight">Veterinary Imaging</span>',
+    $hero_subtitle_html
+  );
+}
 
 $hero_primary_cta_text = get_field('hero_primary_cta_text') ?: 'See the Performance. Drop Your Images';
 $hero_primary_cta_url = get_field('hero_primary_cta_url') ?: 'https://meetings-eu1.hubspot.com/patrick-hazelip?uuid=12a49f70-d167-4efa-abe7-08a62c914e5a';
@@ -283,7 +292,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2 h1.hc-title * {
     margin: 0 0 48px !important;
     max-width: 640px !important;
-    font-size: clamp(42px, 2.7vw, 45px) !important;
+    font-size: 50px !important;
     line-height: 1.25 !important;
     font-weight: 400 !important;
     letter-spacing: -0.055em !important;
@@ -308,6 +317,16 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     color: #ffffff !important;
     white-space: nowrap !important;
     font-family: "Mont", sans-serif !important;
+  }
+
+  .hc-home-hero-v2 .hc-subtitle .hc-subtitle-highlight {
+    display: inline-block !important;
+    background: #0099ff !important;
+    color: #ffffff !important;
+    padding: 4px 11px !important;
+	margin-left: 10px !important;
+    border-radius: 7px !important;
+    line-height: 1.1 !important;
   }
 
   .hc-home-hero-v2 .hc-buttons {
@@ -350,7 +369,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-btn-primary:hover {
-    background: #4799fb !important;
+    background: #0099ff !important;
     color: #ffffff !important;
   }
 
@@ -688,7 +707,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 
     .hc-home-hero-v2 .hc-subtitle,
     .hc-home-hero-v2 .hc-badge-text {
-      white-space: normal !important;
+      white-space: nowrap !important;
     }
 
     .hc-home-hero-v2 .hc-hero-visual {
@@ -771,7 +790,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       max-width: 100% !important;
       font-family: "Mont", sans-serif !important;
       font-size: clamp(36px, 2.7vw, 39px) !important;
-      line-height: 1.25 !important;
+      line-height: 1.0 !important;
       font-weight: 400 !important;
       letter-spacing: -0.05em !important;
       font-style: normal !important;
@@ -791,10 +810,16 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       margin-bottom: 24px !important;
       max-width: 100% !important;
       font-family: "Mont", sans-serif !important;
-      font-size: 20px !important;
-      line-height: 1.15 !important;
+      font-size: 22px !important;
+      line-height: 1.2 !important;
       font-weight: 600 !important;
       white-space: normal !important;
+    }
+
+    .hc-home-hero-v2 .hc-subtitle .hc-subtitle-highlight {
+      padding: 2px 8px !important;
+      margin-top: 4px !important;
+      margin-left: 0 !important;
     }
 
     .hc-home-hero-v2 .hc-buttons {
@@ -812,7 +837,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       min-width: 0 !important;
       min-height: 58px !important;
       padding: 14px 16px !important;
-      font-size: 16px !important;
+      font-size: 14px !important;
       white-space: normal !important;
       text-align: center !important;
     }
@@ -896,7 +921,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 
       <h1 class="hc-title" data-hero-item><?php echo wp_kses_post($hero_title_html); ?></h1>
 
-      <p class="hc-subtitle" data-hero-item><?php echo esc_html($hero_subtitle); ?></p>
+      <p class="hc-subtitle" data-hero-item><?php echo wp_kses_post($hero_subtitle_html); ?></p>
 
       <div class="hc-buttons" data-hero-item>
         <?php if ( !empty($hero_primary_cta_text) && !empty($hero_primary_cta_url) ) : ?>
