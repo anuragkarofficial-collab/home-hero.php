@@ -27,7 +27,7 @@ $hero_product_chip_text = get_field('hero_product_chip_text') ?: 'HawkAI';
 $hero_before_image = get_field('hero_before_image');
 $hero_after_image = get_field('hero_after_image');
 
-$get_image_data = function($image, $fallback_alt = '') {
+$get_image_data = function ($image, $fallback_alt = '') {
   if (is_array($image)) {
     return array(
       'url' => isset($image['url']) ? $image['url'] : '',
@@ -73,19 +73,19 @@ if (have_rows('hero_compare_tabs')) {
     the_row();
 
     $row_before_image = $get_image_data(get_sub_field('before_image'), 'Before image');
-    $row_after_image  = $get_image_data(get_sub_field('after_image'), 'After image');
+    $row_after_image = $get_image_data(get_sub_field('after_image'), 'After image');
 
     if (!empty($row_before_image['url']) && !empty($row_after_image['url'])) {
       $compare_items[] = array(
-        'tab_name'           => get_sub_field('tab_name') ?: 'Tab',
-        'before_image_url'   => $row_before_image['url'],
-        'before_image_alt'   => $row_before_image['alt'],
-        'after_image_url'    => $row_after_image['url'],
-        'after_image_alt'    => $row_after_image['alt'],
+        'tab_name' => get_sub_field('tab_name') ?: 'Tab',
+        'before_image_url' => $row_before_image['url'],
+        'before_image_alt' => $row_before_image['alt'],
+        'after_image_url' => $row_after_image['url'],
+        'after_image_alt' => $row_after_image['alt'],
         'compare_badge_text' => get_sub_field('compare_badge_text') ?: $hero_comparison_badge_text,
-        'before_label'       => get_sub_field('before_label') ?: $hero_before_label,
-        'after_label'        => get_sub_field('after_label') ?: $hero_after_label,
-        'product_chip_text'  => get_sub_field('product_chip_text') ?: $hero_product_chip_text,
+        'before_label' => get_sub_field('before_label') ?: $hero_before_label,
+        'after_label' => get_sub_field('after_label') ?: $hero_after_label,
+        'product_chip_text' => get_sub_field('product_chip_text') ?: $hero_product_chip_text,
       );
     }
   }
@@ -96,15 +96,15 @@ if (have_rows('hero_compare_tabs')) {
  */
 if (empty($compare_items) && !empty($before_image['url']) && !empty($after_image['url'])) {
   $compare_items[] = array(
-    'tab_name'           => $hero_product_chip_text ?: 'HawkAI',
-    'before_image_url'   => $before_image['url'],
-    'before_image_alt'   => $before_image['alt'],
-    'after_image_url'    => $after_image['url'],
-    'after_image_alt'    => $after_image['alt'],
+    'tab_name' => $hero_product_chip_text ?: 'HawkAI',
+    'before_image_url' => $before_image['url'],
+    'before_image_alt' => $before_image['alt'],
+    'after_image_url' => $after_image['url'],
+    'after_image_alt' => $after_image['alt'],
     'compare_badge_text' => $hero_comparison_badge_text,
-    'before_label'       => $hero_before_label,
-    'after_label'        => $hero_after_label,
-    'product_chip_text'  => $hero_product_chip_text,
+    'before_label' => $hero_before_label,
+    'after_label' => $hero_after_label,
+    'product_chip_text' => $hero_product_chip_text,
   );
 }
 
@@ -324,7 +324,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     background: #0099ff !important;
     color: #ffffff !important;
     padding: 3px 11px !important;
-	margin-left: 10px !important;
+    margin-left: 10px !important;
     border-radius: 7px !important;
     line-height: 1.1 !important;
   }
@@ -919,19 +919,19 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
         <span class="hc-badge-text"><?php echo esc_html($hero_badge_text); ?></span>
       </div>
 
-      <h1 class="hc-title" data-hero-item><?php echo wp_kses_post($hero_title_html); ?></h1>
+      <h1 class="hc-title" data-hero-item"><?php echo wp_kses_post($hero_title_html); ?></h1>
 
       <p class="hc-subtitle" data-hero-item><?php echo wp_kses_post($hero_subtitle_html); ?></p>
 
       <div class="hc-buttons" data-hero-item>
-        <?php if ( !empty($hero_primary_cta_text) && !empty($hero_primary_cta_url) ) : ?>
+        <?php if (!empty($hero_primary_cta_text) && !empty($hero_primary_cta_url)) : ?>
           <a class="hc-btn hc-btn-primary" href="<?php echo esc_url($hero_primary_cta_url); ?>">
             <span><?php echo esc_html($hero_primary_cta_text); ?></span>
             <span class="hc-btn-arrow">›</span>
           </a>
         <?php endif; ?>
 
-        <?php if ( !empty($hero_secondary_cta_text) ) : ?>
+        <?php if (!empty($hero_secondary_cta_text)) : ?>
           <a class="hc-btn hc-btn-secondary" href="<?php echo !empty($hero_secondary_cta_url) ? esc_url($hero_secondary_cta_url) : '#'; ?>">
             <span><?php echo esc_html($hero_secondary_cta_text); ?></span>
             <span class="hc-btn-arrow">›</span>
@@ -945,11 +945,11 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
         <div class="hc-hero-stage">
           <div class="hc-compare" data-compare style="--split:54%;">
             <div class="hc-compare-base">
-              <img data-compare-before src="<?php echo esc_url($default_compare_item['before_image_url']); ?>" alt="<?php echo esc_attr($default_compare_item['before_image_alt']); ?>">
+              <img data-compare-before src="<?php echo esc_url($default_compare_item['after_image_url']); ?>" alt="<?php echo esc_attr($default_compare_item['after_image_alt']); ?>">
             </div>
 
             <div class="hc-compare-overlay">
-              <img data-compare-after src="<?php echo esc_url($default_compare_item['after_image_url']); ?>" alt="<?php echo esc_attr($default_compare_item['after_image_alt']); ?>">
+              <img data-compare-after src="<?php echo esc_url($default_compare_item['before_image_url']); ?>" alt="<?php echo esc_attr($default_compare_item['before_image_alt']); ?>">
             </div>
 
             <div class="hc-compare-line"></div>
@@ -968,8 +968,8 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
             <div class="hc-compare-badge" data-compare-badge><?php echo wp_kses_post(str_replace(' +', '<br>+', esc_html($default_compare_item['compare_badge_text']))); ?></div>
 
             <div class="hc-compare-footer">
-              <div class="hc-compare-label" data-compare-before-label><?php echo esc_html($default_compare_item['before_label']); ?></div>
-              <div class="hc-compare-label" data-compare-after-label><?php echo esc_html($default_compare_item['after_label']); ?></div>
+              <div class="hc-compare-label" data-compare-before-label><?php echo esc_html($default_compare_item['after_label']); ?></div>
+              <div class="hc-compare-label" data-compare-after-label><?php echo esc_html($default_compare_item['before_label']); ?></div>
             </div>
 
             <div class="hc-chip" data-compare-chip><?php echo esc_html($default_compare_item['product_chip_text']); ?></div>
@@ -1129,13 +1129,13 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
         var item = compareItems[index];
 
         if (beforeImage) {
-          beforeImage.src = item.before_image_url || '';
-          beforeImage.alt = item.before_image_alt || '';
+          beforeImage.src = item.after_image_url || '';
+          beforeImage.alt = item.after_image_alt || '';
         }
 
         if (afterImage) {
-          afterImage.src = item.after_image_url || '';
-          afterImage.alt = item.after_image_alt || '';
+          afterImage.src = item.before_image_url || '';
+          afterImage.alt = item.before_image_alt || '';
         }
 
         if (badge) {
@@ -1143,11 +1143,11 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
         }
 
         if (beforeLabel) {
-          beforeLabel.textContent = item.before_label || '';
+          beforeLabel.textContent = item.after_label || '';
         }
 
         if (afterLabel) {
-          afterLabel.textContent = item.after_label || '';
+          afterLabel.textContent = item.before_label || '';
         }
 
         if (chip) {
