@@ -200,7 +200,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2 *,
   .hc-home-hero-v2 *::before,
   .hc-home-hero-v2 *::after {
-    font-family: "Noto Sans", sans-serif !important;
+    font-family: "Mont", sans-serif !important;
     box-sizing: border-box !important;
   }
 
@@ -313,7 +313,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     font-size: clamp(25px, 0.95vw, 27px) !important;
     line-height: 1.18 !important;
     font-style: italic !important;
-    font-weight: 700 !important;
+    font-weight: 500 !important;
     color: #ffffff !important;
     white-space: nowrap !important;
     font-family: "Mont", sans-serif !important;
@@ -323,7 +323,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     display: inline-block !important;
     background: #0099ff !important;
     color: #ffffff !important;
-    padding: 4px 11px !important;
+    padding: 3px 11px !important;
 	margin-left: 10px !important;
     border-radius: 7px !important;
     line-height: 1.1 !important;
@@ -812,7 +812,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       font-family: "Mont", sans-serif !important;
       font-size: 22px !important;
       line-height: 1.2 !important;
-      font-weight: 600 !important;
+      font-weight: 500 !important;
       white-space: normal !important;
     }
 
