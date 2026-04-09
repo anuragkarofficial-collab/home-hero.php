@@ -829,6 +829,23 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       margin-top: 0 !important;
     }
 
+    .hc-home-hero-v2 .hc-buttons.is-mobile-above-visual {
+      margin-top: var(--hc-mobile-cta-margin-top, 0px) !important;
+      margin-right: var(--hc-mobile-cta-margin-right, 0px) !important;
+      margin-bottom: var(--hc-mobile-cta-margin-bottom, 18px) !important;
+      margin-left: var(--hc-mobile-cta-margin-left, 0px) !important;
+      padding-top: var(--hc-mobile-cta-padding-top, 0px) !important;
+      padding-right: var(--hc-mobile-cta-padding-right, 0px) !important;
+      padding-bottom: var(--hc-mobile-cta-padding-bottom, 0px) !important;
+      padding-left: var(--hc-mobile-cta-padding-left, 0px) !important;
+      position: relative !important;
+      top: var(--hc-mobile-cta-top, 0px) !important;
+      right: var(--hc-mobile-cta-right, auto) !important;
+      bottom: var(--hc-mobile-cta-bottom, auto) !important;
+      left: var(--hc-mobile-cta-left, auto) !important;
+      z-index: 3 !important;
+    }
+
     .hc-home-hero-v2 .hc-btn,
     .hc-home-hero-v2 .hc-btn-primary,
     .hc-home-hero-v2 .hc-btn-secondary {
@@ -1057,7 +1074,11 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 
       if (isMobile) {
         if (buttons && heroVisual && buttons.parentNode !== heroShell) {
-          heroVisual.insertAdjacentElement('afterend', buttons);
+          heroShell.insertBefore(buttons, heroVisual);
+          buttons.classList.add('is-mobile-above-visual');
+        } else if (buttons && heroVisual && buttons.parentNode === heroShell) {
+          heroShell.insertBefore(buttons, heroVisual);
+          buttons.classList.add('is-mobile-above-visual');
         }
 
         if (title && originalTitleHtml) {
@@ -1078,6 +1099,10 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
           } else {
             buttonsOriginalParent.appendChild(buttons);
           }
+        }
+
+        if (buttons) {
+          buttons.classList.remove('is-mobile-above-visual');
         }
 
         if (title && title.innerHTML !== originalTitleHtml) {
