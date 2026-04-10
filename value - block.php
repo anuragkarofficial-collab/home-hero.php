@@ -46,6 +46,27 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
     padding: 36px 0;
     background: var(--section-bg-color);
     letter-spacing: 0.01em;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+	
+  @media (min-width: 992px) {
+    #hc-value-block-1 {
+      padding-bottom: 60px !important;
+    }
+  }
+
+  @media (min-width: 992px) {
+    #hc-value-block-2 {
+      padding-top: 0px !important;
+      padding-bottom: 0px !important;
+    }
+  }
+	
+  @media (min-width: 992px) {
+    #hc-value-block-3 {
+      padding-top: 60px !important;
+    }
   }
 
   .hc-value-container {
@@ -304,7 +325,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
     font-size: 12px;
     line-height: 1.4;
     color: #262626;
-    margin-top: var(--hc-note-margin-top, 18px);
+    margin-top: var(--hc-note-margin-top, 12px);
     margin-right: var(--hc-note-margin-right, 0);
     margin-bottom: var(--hc-note-margin-bottom, 0);
     margin-left: var(--hc-note-margin-left, 0);
@@ -431,7 +452,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
   }
 </style>
 
-<section class="hc-value-block" style="
+<section id="hc-value-block-<?php echo get_row_index(); ?>" class="hc-value-block" style="
   --title-font: <?php echo esc_attr($title_font); ?>;
   --accent-color: <?php echo esc_attr($accent_color); ?>;
   --accent-light-color: <?php echo esc_attr($accent_light_color); ?>;
