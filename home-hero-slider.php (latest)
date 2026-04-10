@@ -523,10 +523,37 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     background: #050608 !important;
   }
 
-  .hc-home-hero-v2 .hc-compare-overlay {
-    clip-path: inset(0 calc(100% - var(--split)) 0 0);
+  .hc-home-hero-v2 .hc-compare-base,
+  .hc-home-hero-v2 .hc-compare-overlay,
+  .hc-home-hero-v2 .hc-compare-base img,
+  .hc-home-hero-v2 .hc-compare-overlay img {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
+  .hc-home-hero-v2 .hc-compare-overlay {
+    clip-path: none !important;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 0,
+      #000 var(--split),
+      transparent var(--split),
+      transparent 100%
+  );
+    mask-image: linear-gradient(
+      to right,
+      #000 0,
+      #000 var(--split),
+      transparent var(--split),
+      transparent 100%
+  ); 
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+   
   .hc-home-hero-v2 .hc-compare-line {
     position: absolute;
     top: 0;
@@ -535,6 +562,9 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     width: 4px !important;
     background: rgba(255,255,255,0.96) !important;
     transform: translateX(-50%);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: left;
     pointer-events: none;
     z-index: 3;
   }
