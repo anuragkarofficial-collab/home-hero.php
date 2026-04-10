@@ -37,6 +37,8 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
 
   return '';
 };
+
+$is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge)) === 'hawkai';
 ?>
 
 <style>
@@ -65,7 +67,7 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
     display: block;
     font-size: 14px;
     line-height: 1;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #2b2b2b;
     margin: 0 !important;
@@ -297,6 +299,21 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
     opacity: 0.92;
   }
 
+  .hc-value-note {
+    font-family: 'Mont', sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #262626;
+    margin-top: var(--hc-note-margin-top, 18px);
+    margin-right: var(--hc-note-margin-right, 0);
+    margin-bottom: var(--hc-note-margin-bottom, 0);
+    margin-left: var(--hc-note-margin-left, 0);
+    padding-top: var(--hc-note-padding-top, 0);
+    padding-right: var(--hc-note-padding-right, 0);
+    padding-bottom: var(--hc-note-padding-bottom, 0);
+    padding-left: var(--hc-note-padding-left, 0);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hc-value-left img {
       opacity: 1;
@@ -399,6 +416,18 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
     .hc-value-cta {
       width: 100%;
     }
+
+    .hc-value-note {
+      font-size: 11px;
+      margin-top: var(--hc-note-margin-top-mobile, 16px);
+      margin-right: var(--hc-note-margin-right-mobile, 0);
+      margin-bottom: var(--hc-note-margin-bottom-mobile, 0);
+      margin-left: var(--hc-note-margin-left-mobile, 0);
+      padding-top: var(--hc-note-padding-top-mobile, 0);
+      padding-right: var(--hc-note-padding-right-mobile, 0);
+      padding-bottom: var(--hc-note-padding-bottom-mobile, 0);
+      padding-left: var(--hc-note-padding-left-mobile, 0);
+    }
   }
 </style>
 
@@ -411,6 +440,24 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
   --cta-bg-color: <?php echo esc_attr($cta_bg_color); ?>;
   --cta-text-color: <?php echo esc_attr($cta_text_color); ?>;
   --section-bg-color: <?php echo esc_attr($section_bg_color); ?>;
+
+  --hc-note-margin-top: 160px;
+  --hc-note-margin-right: 0px;
+  --hc-note-margin-bottom: 0px;
+  --hc-note-margin-left: 40px;
+  --hc-note-padding-top: 0px;
+  --hc-note-padding-right: 0px;
+  --hc-note-padding-bottom: -45px;
+  --hc-note-padding-left: 0px;
+
+  --hc-note-margin-top-mobile: 60px;
+  --hc-note-margin-right-mobile: 0px;
+  --hc-note-margin-bottom-mobile: 0px;
+  --hc-note-margin-left-mobile: 0px;
+  --hc-note-padding-top-mobile: 0px;
+  --hc-note-padding-right-mobile: 0px;
+  --hc-note-padding-bottom-mobile: 0px;
+  --hc-note-padding-left-mobile: 0px;
 ">
   <div class="hc-value-container">
 
@@ -461,6 +508,10 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
           <a class="hc-value-cta" href="<?php echo esc_url($cta_url); ?>">
             <?php echo esc_html($cta_text); ?>
           </a>
+        <?php endif; ?>
+
+        <?php if ($is_hawkai_block) : ?>
+          <div class="hc-value-note">* These data have been validated by a veterinary specialist</div>
         <?php endif; ?>
       </div>
     </div>
