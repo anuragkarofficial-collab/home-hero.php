@@ -292,7 +292,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2 h1.hc-title * {
     margin: 0 0 48px !important;
     max-width: 640px !important;
-    font-size: 50px !important;
+    font-size: 58px !important;
     line-height: 1.25 !important;
     font-weight: 400 !important;
     letter-spacing: -0.055em !important;
@@ -486,6 +486,9 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 
   .hc-home-hero-v2 .hc-compare {
     --split: 54%;
+    --split-px: 54%;
+    --hc-compare-width: 100%;
+    --hc-compare-height: 100%;
     position: relative;
     width: 100% !important;
     max-width: 480px !important;
@@ -516,8 +519,9 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   .hc-home-hero-v2 .hc-compare-base img,
   .hc-home-hero-v2 .hc-compare-overlay img {
     display: block;
-    width: 100% !important;
-    height: 100% !important;
+    width: var(--hc-compare-width) !important;
+    height: var(--hc-compare-height) !important;
+    max-width: none !important;
     object-fit: cover !important;
     object-position: center center !important;
     background: #050608 !important;
@@ -533,35 +537,25 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
   }
 
   .hc-home-hero-v2 .hc-compare-overlay {
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    right: auto !important;
+    width: var(--split-px) !important;
+    overflow: hidden !important;
     clip-path: none !important;
-    -webkit-mask-image: linear-gradient(
-      to right,
-      #000 0,
-      #000 var(--split),
-      transparent var(--split),
-      transparent 100%
-  );
-    mask-image: linear-gradient(
-      to right,
-      #000 0,
-      #000 var(--split),
-      transparent var(--split),
-      transparent 100%
-  ); 
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
-   
+
   .hc-home-hero-v2 .hc-compare-line {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: var(--split);
+    left: var(--split-px);
     width: 4px !important;
     background: rgba(255,255,255,0.96) !important;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateZ(0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     will-change: left;
@@ -571,7 +565,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 
   .hc-home-hero-v2 .hc-compare-handle {
     position: absolute;
-    left: var(--split);
+    left: var(--split-px);
     top: 50%;
     width: 0 !important;
     height: 0 !important;
@@ -601,9 +595,9 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 
   .hc-home-hero-v2 .hc-compare-badge {
     position: absolute;
-    left: var(--split);
+    left: var(--split-px);
     bottom: 48px !important;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateZ(0);
     z-index: 4;
     background: #ffffff;
     color: #121212;
@@ -1163,9 +1157,31 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       var autoTabDelay = 5000;
       var autoTabTimer = null;
 
+      function syncCompareDimensions() {
+        var rect = compare.getBoundingClientRect();
+        compare.style.setProperty('--hc-compare-width', Math.round(rect.width) + 'px');
+        compare.style.setProperty('--hc-compare-height', Math.round(rect.height) + 'px');
+      }
+
+      syncCompareDimensions();
+      window.addEventListener('resize', function () {
+        syncCompareDimensions();
+        if (input) {
+          updateSplit(input.value);
+        }
+      });
+
       function updateSplit(value) {
-        compare.style.setProperty('--split', value + '%');
-        if (input) input.value = value;
+        var safeValue = Math.max(0, Math.min(100, parseFloat(value) || 0));
+        var rect = compare.getBoundingClientRect();
+        var compareWidth = rect.width || compare.offsetWidth || 1;
+        var splitPx = Math.round((safeValue / 100) * compareWidth);
+        var snappedPercent = (splitPx / compareWidth) * 100;
+
+        compare.style.setProperty('--split', snappedPercent + '%');
+        compare.style.setProperty('--split-px', splitPx + 'px');
+
+        if (input) input.value = safeValue;
       }
 
       function startTabProgress(activeIndex) {
