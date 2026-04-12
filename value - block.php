@@ -99,7 +99,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 
   .hc-value-block .hc-value-header .hc-value-title {
     margin: 0 !important;
-    font-size: 45px;
+    font-size: 52px;
     line-height: 1.25;
     font-weight: 400;
     color: #242424;
@@ -360,7 +360,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 
   @media (max-width: 767px) {
     .hc-value-container {
-      padding: 0 18px;
+      padding: 20px 12px 18px;
     }
 
     .hc-value-header {
@@ -448,6 +448,12 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
       padding-right: var(--hc-note-padding-right-mobile, 0);
       padding-bottom: var(--hc-note-padding-bottom-mobile, 0);
       padding-left: var(--hc-note-padding-left-mobile, 0);
+    }
+	  
+  @media (max-width: 767px) {
+    #hc-value-block-2 {
+      padding-top: 0px !important;
+      padding-bottom: 0px !important;
     }
   }
 </style>
