@@ -52,9 +52,23 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       margin: 0 auto;
     }
 
+    @media (min-width: 768px) {
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__inner {
+        width: min(980px, 100%);
+      }
+
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__title {
+        left: 0;
+      }
+
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle {
+        left: 0;
+      }
+    }
+
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__title {
       margin: 0 0 14px;
-      font-size: 45px;
+      font-size: 52px;
       line-height: 1.25;
       font-weight: 400;
       letter-spacing: -0.055em;
@@ -62,6 +76,7 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       color: <?php echo esc_attr($title_color); ?>;
       position: relative;
       left: -140px;
+      padding-left: 70px
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle {
@@ -71,6 +86,7 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       left: -140px;
       font-family: 'Mont', sans-serif;
       white-space: nowrap;
+      padding-left: 70px;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle,
@@ -201,26 +217,31 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
     @media (max-width: 767px) {
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__inner {
         width: min(840px, calc(100% - 18px));
+        padding-top: 0px;
       }
 
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__title {
-        margin: 0 0 14px;
+        margin: 0 0 10px;
         font-size: 35px;
         line-height: 0.98;
         font-weight: 400;
         letter-spacing: -0.055em;
         font-family: 'Mont', sans-serif;
         left: 0;
+        padding-left: 0px;
+        padding-top: 0px;
       }
 
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle {
-        margin: 0 0 24px;
+        margin: 0 0 12px;
         letter-spacing: -0.02em;
         left: 0;
         white-space: normal;
         max-width: 100%;
         overflow-wrap: break-word;
         word-break: normal;
+        padding-left: 0px;
+        padding-top: 0px;
       }
 
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle,
@@ -242,7 +263,7 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-h3 p,
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-p,
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__subtitle.is-p p {
-        font-size: 16px !important;
+        font-size: 20px !important;
         line-height: 1.45 !important;
         font-weight: 400 !important;
         letter-spacing: -0.01em;
@@ -272,6 +293,45 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label {
         font-size: 10px;
         line-height: 1.25;
+      }
+    }
+	  
+	@media (max-width: 767px) {
+      #hc-animal-ai-simple-block-7 {
+        padding-top: 20px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        padding-bottom: 20px !important;
+        margin-right: 0px !important;
+      }
+
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__inner {
+        padding-top: 0 !important;
+      }
+
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__title {
+        padding-top: 0 !important;
+        margin-bottom: 10px;
+        width: calc(100% + 24px);
+      }
+
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__subtitle {
+        padding-top: 0 !important;
+      }
+  
+    @media (max-width: 767px) {
+      #hc-animal-ai-simple-block-8 {
+        padding-top: 10px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        padding-bottom: 20px !important;
+        margin-right: 0px !important;
+        margin-top: 0px !important;
+      }
+		
+	  #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle {
+        padding-top: 0 !important;
+        font-size: 20px !important;
       }
     }
   </style>
