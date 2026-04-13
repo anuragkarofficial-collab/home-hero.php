@@ -249,11 +249,11 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 
 	.hc-value-right-content p {
 		margin: 0 0 16px;
-		font-size: 16px;
+		font-size: 22px !important;
 		line-height: 1.55;
 		color: #262626;
 		font-family: 'Mont', sans-serif;
-		letter-spacing: -0.02em;
+		letter-spacing: -0.02em !important;
 	}
 
 	.hc-value-right-content ul {
@@ -324,14 +324,20 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		font-size: 12px;
 		line-height: 1.4;
 		color: #262626;
-		margin-top: var(--hc-note-margin-top, 20px) !important;
-		margin-right: var(--hc-note-margin-right, 0);
-		margin-bottom: var(--hc-note-margin-bottom, 0);
-		margin-left: var(--hc-note-margin-left, 0);
-		padding-top: var(--hc-note-padding-top, 0);
-		padding-right: var(--hc-note-padding-right, 0);
-		padding-bottom: var(--hc-note-padding-bottom, 0);
-		padding-left: var(--hc-note-padding-left, 0);
+		margin-top: 20px !important;
+	}
+
+	@media (min-width: 992px) {
+		.hc-value-block--hawkai .hc-value-note--hawkai {
+			display: inline-block;
+			transform: translate(var(--hc-note-x, 0px), var(--hc-note-y, 0px));
+		}
+	}
+
+	@media (max-width: 991px) {
+		.hc-value-block--hawkai .hc-value-note--hawkai {
+			transform: none;
+		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -371,7 +377,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		}
 
 		.hc-value-title {
-			font-size: clamp(26px, 7vw, 34px);
+			font-size: 40px !important;
 		}
 
 		.hc-value-right-content h1 {
@@ -443,14 +449,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 
 		.hc-value-note {
 			font-size: 11px;
-			margin-top: var(--hc-note-margin-top-mobile, 16px);
-			margin-right: var(--hc-note-margin-right-mobile, 0);
-			margin-bottom: var(--hc-note-margin-bottom-mobile, 0);
-			margin-left: var(--hc-note-margin-left-mobile, 0);
-			padding-top: var(--hc-note-padding-top-mobile, 0);
-			padding-right: var(--hc-note-padding-right-mobile, 0);
-			padding-bottom: var(--hc-note-padding-bottom-mobile, 0);
-			padding-left: var(--hc-note-padding-left-mobile, 0);
+			margin-top: 38px !important;
 		}
 	}
 
@@ -464,7 +463,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 
 <section
 	id="hc-value-block-<?php echo get_row_index(); ?>"
-	class="hc-value-block"
+	class="hc-value-block<?php echo $is_hawkai_block ? ' hc-value-block--hawkai' : ''; ?>"
 	style="
 		--title-font: <?php echo esc_attr($title_font); ?>;
 		--accent-color: <?php echo esc_attr($accent_color); ?>;
@@ -474,22 +473,10 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		--cta-bg-color: <?php echo esc_attr($cta_bg_color); ?>;
 		--cta-text-color: <?php echo esc_attr($cta_text_color); ?>;
 		--section-bg-color: <?php echo esc_attr($section_bg_color); ?>;
-		--hc-note-margin-top: 160px;
-		--hc-note-margin-right: 0px;
-		--hc-note-margin-bottom: 0px;
-		--hc-note-margin-left: 40px;
-		--hc-note-padding-top: 0px;
-		--hc-note-padding-right: 0px;
-		--hc-note-padding-bottom: -45px;
-		--hc-note-padding-left: 0px;
-		--hc-note-margin-top-mobile: 60px;
-		--hc-note-margin-right-mobile: 0px;
-		--hc-note-margin-bottom-mobile: 0px;
-		--hc-note-margin-left-mobile: 0px;
-		--hc-note-padding-top-mobile: 0px;
-		--hc-note-padding-right-mobile: 0px;
-		--hc-note-padding-bottom-mobile: 0px;
-		--hc-note-padding-left-mobile: 0px;
+		<?php if ($is_hawkai_block) : ?>
+			--hc-note-x: 130px;
+			--hc-note-y: 420px;
+		<?php endif; ?>
 	"
 >
 	<div class="hc-value-container">
@@ -543,7 +530,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 				<?php endif; ?>
 
 				<?php if ($is_hawkai_block) : ?>
-					<div class="hc-value-note">* These data have been validated by a veterinary specialist</div>
+					<div class="hc-value-note hc-value-note--hawkai">* These data have been validated by a veterinary specialist</div>
 				<?php endif; ?>
 			</div>
 		</div>
