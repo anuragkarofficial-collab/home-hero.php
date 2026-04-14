@@ -98,9 +98,9 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 
 	.hc-value-block .hc-value-header .hc-value-title {
 		margin: 0 !important;
-		font-size: 52px;
+		font-size: 50px;
 		line-height: 1.25;
-		font-weight: 400;
+		font-weight: 300;
 		color: #242424;
 		font-family: 'Mont', sans-serif;
 		letter-spacing: -0.02em;
@@ -237,8 +237,10 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 
 	.hc-value-block .hc-value-right .hc-value-right-content h3,
 	.hc-value-block .hc-value-right .hc-value-right-content h3 strong,
-	.hc-value-block .hc-value-right .hc-value-right-content h3 span {
-		font-size: 25px !important;
+	.hc-value-block .hc-value-right .hc-value-right-content h3 span,
+	.hc-value-block .hc-value-right .hc-value-right-content h3 em,
+	.hc-value-block .hc-value-right .hc-value-right-content h3 a {
+		font-size: 27px !important;
 		line-height: 1.25 !important;
 		font-weight: 400 !important;
 		font-family: 'Mont', sans-serif !important;
@@ -247,7 +249,11 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		text-transform: none !important;
 	}
 
-	.hc-value-right-content p {
+	.hc-value-right-content p,
+	.hc-value-right-content p strong,
+	.hc-value-right-content p span,
+	.hc-value-right-content p em,
+	.hc-value-right-content p a {
 		margin: 0 0 16px;
 		font-size: 22px !important;
 		line-height: 1.55;
@@ -270,15 +276,19 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		padding-left: 0 !important;
 	}
 
-	.hc-value-right-content li {
+	.hc-value-right-content li,
+	.hc-value-right-content li strong,
+	.hc-value-right-content li span,
+	.hc-value-right-content li em,
+	.hc-value-right-content li a {
 		display: list-item !important;
 		margin: 0 0 8px !important;
 		padding-left: 0 !important;
-		font-size: 16px;
+		font-size: 22px !important;
 		line-height: 1.55;
 		color: #262626;
 		font-family: 'Mont', sans-serif;
-		letter-spacing: -0.02em;
+		letter-spacing: -0.02em !important;
 	}
 
 	.hc-value-right-content ul li::marker,
@@ -377,11 +387,11 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		}
 
 		.hc-value-title {
-			font-size: 40px !important;
+			font-size: 30px !important;
 		}
 
 		.hc-value-right-content h1 {
-			font-size: clamp(26px, 6.6vw, 38px);
+			font-size: 30px;
 		}
 
 		.hc-value-right-content h2 {
@@ -391,19 +401,30 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		.hc-value-block .hc-value-right .hc-value-right-content h3,
 		.hc-value-block .hc-value-right .hc-value-right-content h3 strong,
 		.hc-value-block .hc-value-right .hc-value-right-content h3 span {
-			font-size: clamp(19px, 5.2vw, 26px) !important;
+			font-size: 22px !important;
 			line-height: 1.25 !important;
-			font-weight: 400 !important;
+			font-weight: 500 !important;
 			font-family: 'Mont', sans-serif !important;
-			letter-spacing: -0.055em !important;
+			letter-spacing: -0.02em !important;
 			font-style: normal !important;
 			text-transform: none !important;
 		}
 
-		.hc-value-right-content p,
-		.hc-value-right-content li {
-			font-size: 17px;
-		}
+		.hc-value-block .hc-value-right .hc-value-right-content p,
+        .hc-value-block .hc-value-right .hc-value-right-content li,
+        .hc-value-block .hc-value-right .hc-value-right-content li span,
+        .hc-value-block .hc-value-right .hc-value-right-content li a {
+	        font-size: 16px !important;
+	        line-height: 1.25 !important;
+            letter-spacing: -0.02em;
+        }
+		
+		.hc-value-block .hc-value-right .hc-value-right-content li strong,
+        .hc-value-block .hc-value-right .hc-value-right-content li b {
+	        font-size: 16px !important;
+	        line-height: 1.25 !important;
+            letter-spacing: -0.02em;
+        }
 
 		.hc-value-right-content ul,
 		.hc-value-right-content ol {
@@ -449,7 +470,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 
 		.hc-value-note {
 			font-size: 11px;
-			margin-top: 38px !important;
+			margin-top: 58px !important;
 		}
 	}
 
@@ -458,6 +479,18 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 			padding-top: 0 !important;
 			padding-bottom: 0 !important;
 		}
+		
+		 #hc-value-block-1 {
+		     padding-bottom: 30px !important;
+	    }
+
+	    #hc-value-block-3 {
+		    padding-top: 30px !important;
+	    }
+
+        .hc-value-block .hc-value-header .hc-value-eyebrow {
+            font-size: 12px !important;
+	    }
 	}
 </style>
 
