@@ -796,7 +796,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     .hc-home-hero-v2 .hc-badge {
       width: 100% !important;
       max-width: 100% !important;
-      margin-bottom: 24px !important;
+      margin-bottom: 30px !important;
       padding: 10px 14px !important;
       gap: 10px !important;
     }
@@ -841,6 +841,7 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       line-height: 1.2 !important;
       font-weight: 500 !important;
       white-space: normal !important;
+      margin-top: 30px !important;
     }
 
     .hc-home-hero-v2 .hc-subtitle .hc-subtitle-highlight {
@@ -975,13 +976,6 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
         <?php if (!empty($hero_primary_cta_text) && !empty($hero_primary_cta_url)) : ?>
           <a class="hc-btn hc-btn-primary" href="<?php echo esc_url($hero_primary_cta_url); ?>">
             <span><?php echo esc_html($hero_primary_cta_text); ?></span>
-            <span class="hc-btn-arrow">›</span>
-          </a>
-        <?php endif; ?>
-
-        <?php if (!empty($hero_secondary_cta_text)) : ?>
-          <a class="hc-btn hc-btn-secondary" href="<?php echo !empty($hero_secondary_cta_url) ? esc_url($hero_secondary_cta_url) : '#'; ?>">
-            <span><?php echo esc_html($hero_secondary_cta_text); ?></span>
             <span class="hc-btn-arrow">›</span>
           </a>
         <?php endif; ?>
