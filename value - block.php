@@ -218,7 +218,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 	.hc-value-right-content h2,
 	.hc-value-right-content h3 {
 		margin: 0 0 20px;
-		line-height: 0.94 !important;
+		line-height: 1.25 !important;
 		font-weight: 300 !important;
 		font-family: 'Mont', sans-serif !important;
 		letter-spacing: -0.02em !important;
@@ -242,7 +242,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 	.hc-value-block .hc-value-right .hc-value-right-content h3 a {
 		font-size: 27px !important;
 		line-height: 1.25 !important;
-		font-weight: 400 !important;
+		font-weight: 300 !important;
 		font-family: 'Mont', sans-serif !important;
 		letter-spacing: -0.02em !important;
 		font-style: normal !important;
@@ -344,11 +344,16 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		line-height: 1.1;
 		letter-spacing: -0.02em;
 		font-family: 'Mont', sans-serif;
+		transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease, opacity 0.22s ease;
+	    will-change: transform, box-shadow, filter;
 	}
 
 	.hc-value-cta:hover {
 		color: var(--cta-text-color);
 		opacity: 0.92;
+        transform: translateY(-2px);
+	    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+	    filter: brightness(1.04);
 	}
 
 	.hc-value-note {
@@ -529,8 +534,8 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		--cta-text-color: <?php echo esc_attr($cta_text_color); ?>;
 		--section-bg-color: <?php echo esc_attr($section_bg_color); ?>;
 		<?php if ($is_hawkai_block) : ?>
-			--hc-note-x: 130px;
-			--hc-note-y: 420px;
+			--hc-note-x: 120px;
+			--hc-note-y: 210px;
 		<?php endif; ?>
 	"
 >
@@ -585,7 +590,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 				<?php endif; ?>
 
 				<?php if ($is_hawkai_block) : ?>
-					<div class="hc-value-note hc-value-note--hawkai">* These data have been validated by a veterinary specialist</div>
+					<div class="hc-value-note hc-value-note--hawkai">* These results have been validated by veterinary specialists</div>
 				<?php endif; ?>
 			</div>
 		</div>
