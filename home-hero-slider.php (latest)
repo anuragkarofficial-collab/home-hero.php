@@ -329,6 +329,10 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     margin-left: 0 !important;
     border-radius: 0 !important;
     line-height: inherit !important;
+    opacity: 0.45;
+    filter: blur(8px);
+    will-change: opacity, filter;
+    animation: hcSubtitleHazeReveal 0.8s ease-out 1.0s forwards;
   }
 
   .hc-home-hero-v2 .hc-buttons {
@@ -445,6 +449,17 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
       transform: skewX(-16deg) translateX(1050%);
     }
   }
+	
+  @keyframes hcSubtitleHazeReveal {
+    from {
+      opacity: 0.45;
+      filter: blur(3px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
 
   @keyframes hcSecondaryCtaAccent {
     0% {
@@ -465,8 +480,11 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 
   @media (prefers-reduced-motion: reduce) {
     .hc-home-hero-v2 .hc-btn-primary.is-cta-scanning::after,
-    .hc-home-hero-v2 .hc-btn-secondary.is-cta-follow {
+    .hc-home-hero-v2 .hc-btn-secondary.is-cta-follow,
+    .hc-home-hero-v2 .hc-subtitle .hc-subtitle-highlight {
       animation: none !important;
+      opacity: 1 !important;
+      filter: none !important;
     }
   }
 
