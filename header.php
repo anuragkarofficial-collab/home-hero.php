@@ -110,7 +110,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						<?php do_action('wpml_add_language_selector'); ?>
 					</div>
 				<?php } ?>
-				<a href="<?php the_field( 'header_button_url','options' ); ?>" class="hidden xl:block btn text-white border-h-orange hover:bg-white hover:text-h-black hover:border-white"><?php the_field( 'header_button_text','options' ); ?></a>
+
+				<?php
+				$current_page_id = get_queried_object_id();
+				$current_page_slug = $current_page_id ? get_post_field('post_name', $current_page_id) : '';
+				$current_page_title = $current_page_id ? get_the_title($current_page_id) : '';
+
+				$is_home_test_page = !is_front_page() && is_page() && ( $current_page_slug === 'home-test' || $current_page_title === 'Home Test' );
+
+				$header_button_url = $is_home_test_page ? 'https://hawkcell.com/contact/' : get_field( 'header_button_url', 'options' );
+				$header_button_text = $is_home_test_page ? 'Contact Us' : get_field( 'header_button_text', 'options' );
+				?>
+
+				<a href="<?php echo esc_url( $header_button_url ); ?>" class="hidden xl:block btn text-white border-h-orange hover:bg-white hover:text-h-black hover:border-white"><?php echo esc_html( $header_button_text ); ?></a>
 			</div>
 		</div><!-- .site-branding -->
 	</header><!-- #masthead -->
