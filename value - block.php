@@ -25,13 +25,31 @@ $dog_icon_src = 'https://hawkcell.com/wp-content/uploads/2026/04/dog-transparent
 $horse_icon_src = 'https://hawkcell.com/wp-content/uploads/2026/04/horse-transparent.png';
 
 $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src) {
-	$tag_text = is_string($tag_text) ? trim(strtolower($tag_text)) : '';
+	$tag_text = is_string($tag_text) ? trim(wp_strip_all_tags($tag_text)) : '';
+	$normalized_tag_text = function_exists('remove_accents')
+		? strtolower(remove_accents($tag_text))
+		: strtolower($tag_text);
 
-	if (stripos($tag_text, 'small animal') !== false || stripos($tag_text, 'dog') !== false) {
+	if (
+		strpos($normalized_tag_text, 'small animal') !== false ||
+		strpos($normalized_tag_text, 'small animals') !== false ||
+		strpos($normalized_tag_text, 'dog') !== false ||
+		strpos($normalized_tag_text, 'petit animal') !== false ||
+		strpos($normalized_tag_text, 'petits animaux') !== false ||
+		strpos($normalized_tag_text, 'animaux de compagnie') !== false ||
+		strpos($normalized_tag_text, 'chien') !== false
+	) {
 		return '<span class="hc-value-tag-icon hc-value-tag-icon--dog" aria-hidden="true"><img src="' . esc_url($dog_icon_src) . '" alt="" loading="lazy"></span>';
 	}
 
-	if (stripos($tag_text, 'equine') !== false || stripos($tag_text, 'horse') !== false) {
+	if (
+		strpos($normalized_tag_text, 'equine') !== false ||
+		strpos($normalized_tag_text, 'horse') !== false ||
+		strpos($normalized_tag_text, 'equide') !== false ||
+		strpos($normalized_tag_text, 'equides') !== false ||
+		strpos($normalized_tag_text, 'cheval') !== false ||
+		strpos($normalized_tag_text, 'chevaux') !== false
+	) {
 		return '<span class="hc-value-tag-icon hc-value-tag-icon--horse" aria-hidden="true"><img src="' . esc_url($horse_icon_src) . '" alt="" loading="lazy"></span>';
 	}
 
@@ -219,10 +237,10 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 	.hc-value-right-content h3 {
 		margin: 0 0 20px;
 		line-height: 1.25 !important;
-		font-weight: 300 !important;
+		font-weight: inherit !important;
 		font-family: 'Mont', sans-serif !important;
 		letter-spacing: -0.02em !important;
-		color: #242424;
+		color: inherit !important;
 		font-style: normal !important;
 		text-transform: none !important;
 	}
@@ -235,18 +253,26 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		font-size: 35px;
 	}
 
-	.hc-value-block .hc-value-right .hc-value-right-content h3,
-	.hc-value-block .hc-value-right .hc-value-right-content h3 strong,
-	.hc-value-block .hc-value-right .hc-value-right-content h3 span,
-	.hc-value-block .hc-value-right .hc-value-right-content h3 em,
-	.hc-value-block .hc-value-right .hc-value-right-content h3 a {
+	.hc-value-block .hc-value-right .hc-value-right-content h3 {
 		font-size: 27px !important;
 		line-height: 1.25 !important;
-		font-weight: 300 !important;
+		font-weight: inherit !important;
 		font-family: 'Mont', sans-serif !important;
 		letter-spacing: -0.02em !important;
 		font-style: normal !important;
 		text-transform: none !important;
+		color: inherit !important;
+	}
+
+	.hc-value-block .hc-value-right .hc-value-right-content h3 span,
+	.hc-value-block .hc-value-right .hc-value-right-content h3 em,
+	.hc-value-block .hc-value-right .hc-value-right-content h3 a {
+		font-size: inherit !important;
+		line-height: inherit !important;
+		font-family: inherit !important;
+		letter-spacing: inherit !important;
+		font-style: inherit !important;
+		text-transform: inherit !important;
 	}
 
 	.hc-value-right-content p {
@@ -261,12 +287,10 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 	.hc-value-right-content p strong,
 	.hc-value-right-content p span,
 	.hc-value-right-content p em,
-	.hc-value-right-content p a {
+	.hc-value-right-content p a,
+	.hc-value-right-content p b {
 		font-size: inherit !important;
-		line-height: inherit !important;
-		color: inherit !important;
-		font-family: inherit !important;
-		letter-spacing: inherit !important;
+	    line-height: inherit !important;
 	}
 
 	.hc-value-right-content ul {
@@ -299,10 +323,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 	.hc-value-right-content li a,
 	.hc-value-right-content li b {
 		font-size: inherit !important;
-		line-height: inherit !important;
-		color: inherit !important;
-		font-family: inherit !important;
-		letter-spacing: inherit !important;
+	    line-height: inherit !important;
 	}
 
 	.hc-value-right-content li p {
@@ -324,8 +345,13 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 		font-family: 'Mont', sans-serif;
 	}
 
-	.hc-value-right-content strong {
-		font-weight: 700;
+	.hc-value-right-content strong,
+	.hc-value-right-content b,
+	.hc-value-right-content p strong,
+	.hc-value-right-content p b,
+	.hc-value-right-content li strong,
+	.hc-value-right-content li b {
+		font-weight: 700 !important;
 	}
 
 	.hc-value-cta {
@@ -425,16 +451,24 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 			font-size: clamp(22px, 6vw, 34px);
 		}
 
-		.hc-value-block .hc-value-right .hc-value-right-content h3,
-		.hc-value-block .hc-value-right .hc-value-right-content h3 strong,
-		.hc-value-block .hc-value-right .hc-value-right-content h3 span {
+		.hc-value-block .hc-value-right .hc-value-right-content h3 {
 			font-size: 22px !important;
-			line-height: 1.25 !important;
-			font-weight: 500 !important;
-			font-family: 'Mont', sans-serif !important;
-			letter-spacing: -0.02em !important;
-			font-style: normal !important;
-			text-transform: none !important;
+	        line-height: 1.25 !important;
+	        font-family: 'Mont', sans-serif !important;
+	        letter-spacing: -0.02em !important;
+	        font-style: normal !important;
+	        text-transform: none !important;
+	        color: inherit !important;
+	        font-weight: inherit !important;
+		}
+
+		.hc-value-block .hc-value-right .hc-value-right-content h3 span {
+			font-size: inherit !important;
+			line-height: inherit !important;
+			font-family: inherit !important;
+			letter-spacing: inherit !important;
+			font-style: inherit !important;
+			text-transform: inherit !important;
 		}
 
 		.hc-value-block .hc-value-right .hc-value-right-content p,
@@ -451,6 +485,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 			font-size: 16px !important;
 			line-height: 1.25 !important;
 			letter-spacing: -0.02em;
+			font-weight: 700 !important;
 		}
 
 		.hc-value-right-content ul,
