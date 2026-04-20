@@ -57,6 +57,20 @@ $get_tag_icon = static function ($tag_text) use ($dog_icon_src, $horse_icon_src)
 };
 
 $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge)) === 'hawkai';
+
+$is_french = false;
+if (function_exists('pll_current_language')) {
+	$is_french = pll_current_language('slug') === 'fr';
+} elseif (defined('ICL_LANGUAGE_CODE')) {
+	$is_french = ICL_LANGUAGE_CODE === 'fr';
+} else {
+	$current_locale = function_exists('determine_locale') ? determine_locale() : get_locale();
+	$is_french = strpos(strtolower($current_locale), 'fr') === 0;
+}
+
+$hawkai_note = $is_french
+	? '*Ces résultats ont été validés par des spécialistes vétérinaires'
+	: '* These results have been validated by veterinary specialists';
 ?>
 
 <style>
@@ -625,7 +639,7 @@ $is_hawkai_block = is_string($product_badge) && strtolower(trim($product_badge))
 				<?php endif; ?>
 
 				<?php if ($is_hawkai_block) : ?>
-					<div class="hc-value-note hc-value-note--hawkai">* These results have been validated by veterinary specialists</div>
+					<div class="hc-value-note hc-value-note--hawkai"><?php echo esc_html($hawkai_note); ?></div>
 				<?php endif; ?>
 			</div>
 		</div>
