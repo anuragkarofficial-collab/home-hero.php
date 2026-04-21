@@ -5,6 +5,7 @@ $subtitle = get_sub_field('subtitle');
 $subtitle_size = get_sub_field('subtitle_size') ?: 'h2';
 $tags = get_sub_field('tags');
 $description_line = get_sub_field('description_line');
+$short_text = get_sub_field('short_text');
 $image = get_sub_field('image');
 $image_labels = get_sub_field('image_labels');
 
@@ -126,6 +127,30 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       font-weight: 400 !important;
     }
 
+    @media (min-width: 992px) {
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle p,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle h1,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle h2,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle h3,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle span,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle strong,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle b,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle em,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle i,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle *,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle.is-h1,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle.is-h1 p,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle.is-h2,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle.is-h2 p,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle.is-h3,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle.is-h3 p,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle.is-p,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__subtitle.is-p p {
+        font-size: 16px !important;
+      }
+    }
+
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__tags {
       display: flex;
       flex-wrap: wrap;
@@ -149,7 +174,7 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       width: fit-content;
       max-width: 100%;
       text-transform: none;
-      font-variant-caps: normal
+      font-variant-caps: normal;
       letter-spacing: 0;
       font-family: 'Mont', sans-serif;
     }
@@ -160,11 +185,57 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__description {
-      margin: 0 0 20px;
+      margin: 0 0 8px;
       font-size: 11px;
       line-height: 1.45;
       color: <?php echo esc_attr($description_line_color); ?>;
       font-family: 'Mont', sans-serif;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text {
+      width: 88%;
+      max-width: 1500px;
+      margin: 0 auto 16px;
+      text-align: center;
+      font-family: 'Mont', sans-serif;
+      color: <?php echo esc_attr($description_line_color); ?>;
+      font-size: 16px !important;
+      line-height: 1.4;
+	  color: #000000;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text p,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h1,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h2,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h3,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h4,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h5,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h6,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text span,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text strong,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text b,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text em,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text i,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text * {
+      font-size: 16px !important;
+      line-height: 1.4 !important;
+      font-family: 'Mont', sans-serif !important;
+      margin-top: 0;
+      margin-bottom: 0;
+      text-align: center;
+      font-weight: 400 !important;
+    }
+
+    /* MANUAL GAP CONTROLS FOR BOTH BLOCKS */
+    #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__description,
+    #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__description {
+      margin-bottom: 18px;
+    }
+
+    #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text,
+    #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text {
+      margin: 0 auto 20px;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__image-wrap {
@@ -176,12 +247,19 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       width: 100%;
       height: auto;
     }
-	  
+
     @media (min-width: 992px) {
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__image-wrap {
         width: 88%;
         max-width: 1500px;
         margin: 0 auto;
+      }
+
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__labels {
+        width: 88%;
+        max-width: 1500px;
+        margin: 12px auto 0;
+        font-size: 16px;
       }
     }
 
@@ -191,10 +269,11 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       gap: 9px;
       margin-top: 12px;
       align-items: start;
+      font-style: 16px;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label {
-      font-size: clamp(12px, 1.35vw, 16px);
+      font-size: 16px;
       line-height: 1.3;
       text-align: center;
       font-family: 'Mont', sans-serif;
@@ -216,12 +295,14 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label strong,
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label b {
       font-weight: 700 !important;
+      font-size: 16px !important;
     }
- 
+
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label:nth-child(1),
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label:nth-child(2),
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label:nth-child(3) {
       text-align: center;
+      font-size: 16px !important;
     }
 
     @media (max-width: 767px) {
@@ -300,13 +381,47 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
         line-height: 1.4;
       }
 
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+      }
+
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text p,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h1,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h2,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h3,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h4,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h5,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h6,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text span,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text strong,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text b,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text em,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text i,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text * {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+      }
+
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__description,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__description {
+        margin-bottom: 14px;
+      }
+
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text {
+        margin-bottom: 16px;
+      }
+
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__labels {
         gap: 6px;
         margin-top: 9px;
+        font-size: 16px;
       }
 
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label {
-        font-size: 10px;
+        font-size: 16px;
         line-height: 1.25;
       }
     }
@@ -378,6 +493,12 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       </div>
     <?php endif; ?>
 
+    <?php if ($short_text) : ?>
+      <div class="hc-animal-ai-simple-block__short-text">
+        <?php echo wp_kses_post($short_text); ?>
+      </div>
+    <?php endif; ?>
+
     <?php if ($image) : ?>
       <figure class="hc-animal-ai-simple-block__image-wrap">
         <?php
@@ -387,8 +508,8 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
             'full',
             false,
             array(
-              'class' => 'hc-animal-ai-simple-block__image',
-              'alt'   => !empty($image['alt']) ? $image['alt'] : $title,
+              'class'   => 'hc-animal-ai-simple-block__image',
+              'alt'     => !empty($image['alt']) ? $image['alt'] : $title,
               'loading' => 'lazy',
             )
           );
