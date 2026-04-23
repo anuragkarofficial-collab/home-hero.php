@@ -26,7 +26,15 @@ if (!in_array($subtitle_size, $allowed_subtitle_sizes, true)) {
   $subtitle_size = 'h2';
 }
 
-$block_id = 'hc-animal-ai-simple-block-' . get_row_index();
+$row_index = get_row_index();
+$block_id = 'hc-animal-ai-simple-block-' . $row_index;
+
+$mobile_short_text = '';
+if ($row_index === 7) {
+  $mobile_short_text = 'Entraîné sur des données animales, notre modèle préserve mieux les petites structures anatomiques.';
+} elseif ($row_index === 8) {
+  $mobile_short_text = 'Il améliore la qualité d’image, sans hallucinations ni perte de détail.';
+}
 ?>
 
 <section id="<?php echo esc_attr($block_id); ?>" class="hc-animal-ai-simple-block" style="background-color: <?php echo esc_attr($background_colour); ?>;">
@@ -201,7 +209,7 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       color: <?php echo esc_attr($description_line_color); ?>;
       font-size: 16px !important;
       line-height: 1.4;
-	  color: #000000;
+      color: #000000;
     }
 
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text,
@@ -213,8 +221,6 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h5,
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text h6,
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text span,
-    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text strong,
-    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text b,
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text em,
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text i,
     #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text * {
@@ -224,7 +230,16 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       margin-top: 0;
       margin-bottom: 0;
       text-align: center;
-      font-weight: 400 !important;
+      font-weight: 400;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text strong,
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text b {
+      font-weight: 700 !important;
+    }
+
+    #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text--mobile {
+      display: none;
     }
 
     /* MANUAL GAP CONTROLS FOR BOTH BLOCKS */
@@ -404,6 +419,11 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
         line-height: 1.4 !important;
       }
 
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text strong,
+      #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__short-text b {
+        font-weight: 700 !important;
+      }
+
       #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__description,
       #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__description {
         margin-bottom: 14px;
@@ -423,6 +443,70 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
       #<?php echo esc_attr($block_id); ?> .hc-animal-ai-simple-block__label {
         font-size: 16px;
         line-height: 1.25;
+      }
+
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text {
+        display: none;
+      }
+
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile {
+        display: block;
+        width: 100%;
+        max-width: none;
+        margin: 0 0 16px;
+        text-align: left;
+        font-family: 'Mont', sans-serif;
+        color: #000000;
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+      }
+
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile p,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile h1,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile h2,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile h3,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile h4,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile h5,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile h6,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile span,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile strong,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile b,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile em,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile i,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile *,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile p,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile h1,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile h2,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile h3,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile h4,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile h5,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile h6,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile span,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile strong,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile b,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile em,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile i,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile * {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+        font-family: 'Mont', sans-serif !important;
+        margin-top: 0;
+        margin-bottom: 0;
+        text-align: left !important;
+        font-weight: 400 !important;
+		padding-bottom: 8px !important;
+      }
+
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile strong,
+      #hc-animal-ai-simple-block-7 .hc-animal-ai-simple-block__short-text--mobile b,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile strong,
+      #hc-animal-ai-simple-block-8 .hc-animal-ai-simple-block__short-text--mobile b {
+        font-weight: 700 !important;
+        padding-bottom: 8px !important;
       }
     }
 
@@ -496,6 +580,12 @@ $block_id = 'hc-animal-ai-simple-block-' . get_row_index();
     <?php if ($short_text) : ?>
       <div class="hc-animal-ai-simple-block__short-text">
         <?php echo wp_kses_post($short_text); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($mobile_short_text) : ?>
+      <div class="hc-animal-ai-simple-block__short-text hc-animal-ai-simple-block__short-text--mobile">
+        <?php echo esc_html($mobile_short_text); ?>
       </div>
     <?php endif; ?>
 
