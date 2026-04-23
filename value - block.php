@@ -69,8 +69,8 @@ if (function_exists('pll_current_language')) {
 }
 
 $hawkai_note = $is_french
-	? '*Ces résultats ont été validés par des spécialistes vétérinaires'
-	: '* These results have been validated by veterinary specialists';
+	? '*Basé sur des données internes, des modélisations et des cas d’usage représentatifs ; les résultats réels peuvent varier.'
+	: '* Based on internal data, modeling, and representative use cases; actual results may vary';
 ?>
 
 <style>
@@ -143,7 +143,7 @@ $hawkai_note = $is_french
 		align-items: center;
 		gap: 14px;
 		flex-wrap: wrap;
-		margin-bottom: 28px;
+		margin-bottom: 3px !important;
 	}
 
 	.hc-value-badge {
@@ -219,10 +219,15 @@ $hawkai_note = $is_french
 
 	.hc-value-grid {
 		display: grid;
-		grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-		gap: 56px;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		column-gap: 20px;
+		row-gap: 16px;
 		align-items: start;
 	}
+	
+	.hc-value-right {
+	    margin-left: -12px;
+    }
 
 	.hc-value-left img {
 		display: block;
@@ -233,6 +238,16 @@ $hawkai_note = $is_french
 		transform-origin: center center;
 		will-change: transform, opacity;
 		transition: opacity 1.9s ease, transform 2.4s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	
+	@media (min-width: 992px) {
+		.hc-value-left img {
+			width: 80%;
+			max-width: 80%;
+			margin-left: 0;
+			margin-right: 0px;
+            margin-top: 20px;
+		}
 	}
 
 	.hc-value-block.is-visible .hc-value-left img {
@@ -250,13 +265,14 @@ $hawkai_note = $is_french
 	.hc-value-right-content h2,
 	.hc-value-right-content h3 {
 		margin: 0 0 20px;
-		line-height: 1.25 !important;
+		line-height: 1.5 !important;
 		font-weight: inherit !important;
 		font-family: 'Mont', sans-serif !important;
 		letter-spacing: -0.02em !important;
 		color: inherit !important;
 		font-style: normal !important;
 		text-transform: none !important;
+		margin-top: 20px;
 	}
 
 	.hc-value-right-content h1 {
@@ -269,7 +285,7 @@ $hawkai_note = $is_french
 
 	.hc-value-block .hc-value-right .hc-value-right-content h3 {
 		font-size: 27px !important;
-		line-height: 1.25 !important;
+		line-height: 1.5 !important;
 		font-weight: inherit !important;
 		font-family: 'Mont', sans-serif !important;
 		letter-spacing: -0.02em !important;
@@ -322,7 +338,7 @@ $hawkai_note = $is_french
 	}
 
 	.hc-value-right-content li {
-		margin: 0 0 8px !important;
+		margin: 0 0 20px !important;
 		padding-left: 0 !important;
 		font-size: 22px !important;
 		line-height: 1.55;
@@ -406,8 +422,12 @@ $hawkai_note = $is_french
 
 	@media (min-width: 992px) {
 		.hc-value-block--hawkai .hc-value-note--hawkai {
-			display: inline-block;
-			transform: translate(var(--hc-note-x, 0px), var(--hc-note-y, 0px));
+			display: block;
+		    max-width: 420px;
+		    white-space: <?php echo $is_french ? 'normal' : 'nowrap'; ?>;
+		    overflow-wrap: <?php echo $is_french ? 'anywhere' : 'break-word'; ?>;
+		    word-break: normal;
+		    transform: translate(var(--hc-note-x, 0px), var(--hc-note-y, 0px));
 		}
 	}
 
@@ -583,8 +603,8 @@ $hawkai_note = $is_french
 		--cta-text-color: <?php echo esc_attr($cta_text_color); ?>;
 		--section-bg-color: <?php echo esc_attr($section_bg_color); ?>;
 		<?php if ($is_hawkai_block) : ?>
-			--hc-note-x: 120px;
-			--hc-note-y: 210px;
+			--hc-note-x: <?php echo $is_french ? '5px' : '5px'; ?>;
+	        --hc-note-y: <?php echo $is_french ? '40px' : '40px'; ?>;
 		<?php endif; ?>
 	"
 >
