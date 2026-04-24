@@ -41,12 +41,8 @@
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 
-
-	
-
 	<?php wp_head(); ?>
 </head>
-
 
 <?php if ( is_page( 9 ) ) { ?>
 	<body <?php body_class('font-body text-h-black veterinarians'); ?> style="opacity:0">
@@ -112,14 +108,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<?php } ?>
 
 				<?php
-				$current_page_id = get_queried_object_id();
-				$current_page_slug = $current_page_id ? get_post_field('post_name', $current_page_id) : '';
+				$current_page_id    = get_queried_object_id();
+				$current_page_slug  = $current_page_id ? get_post_field('post_name', $current_page_id) : '';
 				$current_page_title = $current_page_id ? get_the_title($current_page_id) : '';
 
-				$is_home_test_page = !is_front_page() && is_page() && ( $current_page_slug === 'home-test' || $current_page_title === 'Home Test' );
+				$current_language = defined( 'ICL_LANGUAGE_CODE' ) ? ICL_LANGUAGE_CODE : '';
 
-				$header_button_url = $is_home_test_page ? 'https://hawkcell.com/contact/' : get_field( 'header_button_url', 'options' );
-				$header_button_text = $is_home_test_page ? 'Contact Us' : get_field( 'header_button_text', 'options' );
+				$is_home_test_page = !is_front_page() && is_page() && ( $current_page_slug === 'home-test' || $current_page_title === 'Home Test' );
+				$is_home_test_fr_page = !is_front_page() && is_page() && ( $current_page_title === 'Home Test FR' );
+
+				// New draft page only
+				$is_veterinary_imaging_home_draft = !is_front_page() && is_page() && (
+					$current_page_slug === 'veterinary-imaging-solutions-home' ||
+					$current_page_title === 'Veterinary Imaging Solutions - Home'
+				);
+
+				if ( $is_veterinary_imaging_home_draft ) {
+					if ( $current_language === 'fr' ) {
+						$header_button_url = 'https://meetings-eu1.hubspot.com/emilie-chomienne/fr-prenez-rdv';
+						$header_button_text = 'Contactez-Nous';
+					} else {
+						$header_button_url = 'https://hawkcell.com/contact/';
+						$header_button_text = 'Contact Us';
+					}
+				} elseif ( $is_home_test_fr_page ) {
+					$header_button_url = 'https://meetings-eu1.hubspot.com/emilie-chomienne/fr-prenez-rdv';
+					$header_button_text = 'Contactez-Nous';
+				} elseif ( $is_home_test_page ) {
+					$header_button_url = 'https://hawkcell.com/contact/';
+					$header_button_text = 'Contact Us';
+				} else {
+					$header_button_url = get_field( 'header_button_url', 'options' );
+					$header_button_text = get_field( 'header_button_text', 'options' );
+				}
 				?>
 
 				<a href="<?php echo esc_url( $header_button_url ); ?>" class="hidden xl:block btn text-white border-h-orange hover:bg-white hover:text-h-black hover:border-white"><?php echo esc_html( $header_button_text ); ?></a>
