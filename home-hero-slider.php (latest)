@@ -272,13 +272,13 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     width: 16px !important;
     height: 16px !important;
     border-radius: 50%;
-    background: #1f8cff !important;
+    background: #ffffff !important;
     flex: 0 0 16px;
     box-shadow: none !important;
   }
 
   .hc-home-hero-v2 .hc-badge-text {
-    font-size: 15px !important;
+    font-size: 12px !important;
     line-height: 1.2 !important;
     font-style: italic !important;
     font-weight: 400 !important;
@@ -369,14 +369,14 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
 
   .hc-home-hero-v2 .hc-btn-primary {
     min-width: 360px !important;
-    background: #5ea8ff !important;
-    color: #ffffff !important;
+    background: #ffffff !important;
+    color: #111111 !important;
     box-shadow: none !important;
   }
 
   .hc-home-hero-v2 .hc-btn-primary:hover {
-    background: #0099ff !important;
-    color: #ffffff !important;
+    background: #ffffff !important;
+    color: #111111 !important;
   }
 
   .hc-home-hero-v2 .hc-btn-secondary {
@@ -736,6 +736,51 @@ $default_compare_item = !empty($compare_items) ? $compare_items[0] : null;
     color: rgba(255,255,255,0.75);
     text-align: center;
     font-size: 18px;
+  }
+	
+  @media (min-width: 1600px) {
+    .hc-home-hero-v2 {
+      min-height: 100svh !important;
+    }
+
+    .hc-home-hero-v2 .hc-hero-shell {
+      max-width: 1540px !important;
+      min-height: calc(100svh - 126px) !important;
+      grid-template-columns: minmax(0, 1.08fr) minmax(560px, 660px) !important;
+      gap: 52px !important;
+      padding: 0 44px !important;
+      align-items: center !important;
+    }
+
+    .hc-home-hero-v2 .hc-hero-copy,
+    .hc-home-hero-v2 .hc-title,
+    .hc-home-hero-v2 .hc-title *,
+    .hc-home-hero-v2 h1.hc-title,
+    .hc-home-hero-v2 h1.hc-title *,
+    .hc-home-hero-v2 .hc-subtitle {
+      max-width: 760px !important;
+    }
+
+    .hc-home-hero-v2 .hc-title,
+    .hc-home-hero-v2 .hc-title *,
+    .hc-home-hero-v2 h1.hc-title,
+    .hc-home-hero-v2 h1.hc-title * {
+      font-size: 65px !important;
+      line-height: 1.12 !important;
+    }
+
+    .hc-home-hero-v2 .hc-subtitle {
+      font-size: 22px !important;
+    }
+
+    .hc-home-hero-v2 .hc-hero-stage,
+    .hc-home-hero-v2 .hc-compare {
+      max-width: 620px !important;
+    }
+
+    .hc-home-hero-v2 .hc-compare-tabs {
+      margin-top: 20px !important;
+    }
   }
 
   @media (max-width: 1180px) {
